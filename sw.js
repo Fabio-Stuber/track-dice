@@ -1,8 +1,5 @@
-// Dieser Helfer sorgt dafür, dass die App installierbar ist
 self.addEventListener("install", (event) => {
-    console.log("App installiert");
+    console.log("App installed");
 });
 
-self.addEventListener("fetch", (event) => {
-    // Hier könnte man später einstellen, dass die App auch ohne Internet funktioniert
-});
+self.addEventListener("fetch", (event) => {});

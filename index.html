@@ -1,229 +1,236 @@
 <!doctype html>
 <html class="scroll-smooth no-copy" lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title data-key="index.meta.title">
-            Roll the Track Dice - Your Random Train Adventure
-        </title>
-        <meta
-            name="index.meta.description"
-            data-key="meta_description"
-            content="Experience a thrilling random adventure with the Track Dice!"
-        />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://app.gleiswuerfeln.ch/" />
-        <link
-            rel="alternate"
-            hreflang="de"
-            href="https://app.gleiswuerfeln.ch/"
-        />
-        <link
-            rel="alternate"
-            hreflang="en"
-            href="https://app.gleiswuerfeln.ch/?lang=en"
-        />
-        <link
-            rel="alternate"
-            hreflang="fr"
-            href="https://app.gleiswuerfeln.ch/?lang=fr"
-        />
-        <link
-            rel="alternate"
-            hreflang="it"
-            href="https://app.gleiswuerfeln.ch/?lang=it"
-        />
-        <link
-            rel="alternate"
-            hreflang="x-default"
-            href="https://app.gleiswuerfeln.ch/?lang=en"
-        />
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <link rel="icon" type="image/svg+xml" href="img/logo-track-dice.svg" />
+    <title data-key="index.meta.title">
+        Roll the Track Dice - Your Random Train Adventure
+    </title>
+    <meta name="index.meta.description" data-key="meta_description"
+        content="Experience a thrilling random adventure with the Track Dice!" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://app.gleiswuerfeln.ch/" />
+    <link rel="alternate" hreflang="de" href="https://app.gleiswuerfeln.ch/" />
+    <link rel="alternate" hreflang="en" href="https://app.gleiswuerfeln.ch/?lang=en" />
+    <link rel="alternate" hreflang="fr" href="https://app.gleiswuerfeln.ch/?lang=fr" />
+    <link rel="alternate" hreflang="it" href="https://app.gleiswuerfeln.ch/?lang=it" />
+    <link rel="alternate" hreflang="x-default" href="https://app.gleiswuerfeln.ch/?lang=en" />
 
-        <link rel="manifest" href="manifest.json" />
+    <link rel="icon" type="image/svg+xml" href="img/logo-track-dice.svg" />
 
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="Track Dice" />
-        <link rel="apple-touch-icon" href="img/logo-512.png" />
-        
-        <meta property=" og:type" content="website" />
-        <meta
-            property="og:title"
-            data-key="index.meta.title"
-            content="Roll the Track Dice - Your Random Train Adventure"
-        />
-        <meta
-            property="og:description"
-            data-key="index.meta.description"
-            content="Experience a thrilling random adventure with the Track Dice!"
-        />
-        <meta property="og:url" content="https://app.gleiswuerfeln.ch/" />
-        <meta
-            property="og:image"
-            content="https://app.gleiswuerfeln.ch/img/track-dice.jpg"
-        />
-        <meta property="og:locale" data-key="meta_locale" content="de_CH" />
+    <link rel="manifest" href="manifest.json" />
 
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400..900&display=swap"
-            rel="stylesheet"
-        />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Track Dice" />
+    <link rel="apple-touch-icon" href="img/logo-512.png" />
 
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-        <style type="text/tailwindcss">
-            @custom-variant dark (&:where(.dark, .dark *));
+    <meta property="og:type" content="website" />
+    <meta property="og:title" data-key="index.meta.title" content="Roll the Track Dice - Your Random Train Adventure" />
+    <meta property="og:description" data-key="index.meta.description"
+        content="Experience a thrilling random adventure with the Track Dice!" />
+    <meta property="og:url" content="https://app.gleiswuerfeln.ch/" />
+    <meta property="og:image" content="https://app.gleiswuerfeln.ch/img/track-dice.jpg" />
+    <meta property="og:locale" data-key="meta_locale" content="de_CH" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400..900&display=swap" rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+        @custom-variant dark (&:where(.dark, .dark *));
             @theme {
                 --font-sans: "Maven Pro", sans-serif;
             }
         </style>
-        <link rel="stylesheet" href="css/style.css" />
-    </head>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
 
-    <body
-        class="font-sans flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900"
-    >
-        <!-- navigation -->
-        <header id="header"></header>
-        <!-- main content -->
+<body class="font-sans flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900">
+    <!-- navigation -->
+    <header id="header"></header>
+    <!-- main content -->
 
-        <main class="grow show-logged-out">
-            <section
-                class="no-copy relative min-h-[calc(100dvh-4rem)] flex items-center overflow-hidden"
-            >
-                <div class="absolute inset-0 z-0">
-                    <img
-                        id="hero-bg"
-                        src="img/track-dice.jpg"
-                        alt="Hintergrund"
-                        class="w-full h-full object-cover object-[85%_center] md:object-right opacity-50 dark:opacity-50"
-                    />
-                </div>
+    <main class="grow show-logged-out">
+        <section class="no-copy relative min-h-[calc(100dvh-4rem)] flex items-center overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img id="hero-bg" src="img/track-dice.jpg" alt="Hintergrund"
+                    class="w-full h-full object-cover object-[85%_center] md:object-right opacity-50 dark:opacity-50" />
+            </div>
 
-                <div
-                    class="relative z-10 p-8 mx-auto w-full max-w-7xl text-white"
-                >
-                    <section
-                        class="shadow-md bg-white/50 dark:bg-gray-800/50 rounded-xl p-8 space-y-4 backdrop-blur-md max-w-xl"
-                    >
-                        <h1
-                            data-key="index.show-logged-out.title"
-                            class="text-4xl font-bold text-red-600 dark:text-white uppercase"
-                        >
-                            index.show-logged-out.title
-                        </h1>
-                        <p
-                            data-key="index.show-logged-out.description"
-                            class="text-sm text-gray-900 dark:text-white text-pretty text-justify"
-                        >
-                            index.show-logged-out.description
-                        </p>
+            <div class="relative z-10 p-8 mx-auto w-full max-w-7xl text-white">
+                <section
+                    class="shadow-md bg-white/50 dark:bg-gray-800/50 rounded-xl p-8 space-y-4 backdrop-blur-md max-w-xl">
+                    <h1 data-key="index.show-logged-out.title"
+                        class="text-4xl font-bold text-red-600 dark:text-white uppercase">
+                        index.show-logged-out.title
+                    </h1>
+                    <p data-key="index.show-logged-out.description"
+                        class="text-sm text-gray-900 dark:text-white text-pretty text-justify">
+                        index.show-logged-out.description
+                    </p>
 
-                        <div
-                            class="flex flex-col sm:flex-row items-center gap-4 pt-4 w-full"
-                        >
-                            <a
-                                data-key="index.show-logged-out.loginbtn"
-                                href="#"
-                                id="loginNavBtn"
-                                class="w-full text-center bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition"
-                                >index.show-logged-out.loginbtn</a
-                            >
-                            <a
-                                data-key="index.show-logged-out.signupbtn"
-                                href="#"
-                                id="signupNavBtn"
-                                class="w-full text-center bg-gray-600 hover:bg-gray-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition"
-                                >index.show-logged-out.signupbtn</a
-                            >
-                        </div>
-                    </section>
-                </div>
-            </section>
-        </main>
-
-        <main
-            class="flex-grow max-w-7xl w-full mx-auto pt-8 pb-8 px-4 grid grid-cols-1 lg:grid-cols-12 gap-8 show-logged-in"
-        >
-            <div class="lg:col-span-8">
-                <section class="bg-white dark:bg-gray-700 rounded-xl p-8">
-                    <div class="z-10 space-y-8">
-                        <div>
-                            <span
-                                class="text-sm font-bold st text-red-500 dark:text-red-400 uppercase"
-                                >Über mich</span
-                            >
-
-                            <h2
-                                class="text-2xl md:text-4xl font-black text-gray-800 dark:text-white uppercase"
-                            >
-                                Hi, ich bin Fabio<span
-                                    class="text-red-500 dark:text-red-400"
-                                    >!</span
-                                >
-                            </h2>
-                        </div>
-
-                        <p
-                            class="text-base text-gray-600 dark:text-gray-400 text-justify"
-                        >
-                            Schön, dass du den Weg zu mir gefunden hast. Ich bin
-                            dein Spezialist für alles, was mit visueller
-                            Kommunikation und digitaler Gestaltung zu tun hat.
-                            Ich liebe es, Ideen in die Tat umzusetzen und
-                            digitale Erlebnisse zu schaffen, die hängen bleiben.
-                            Meine Welt dreht sich um alles, was Augen und Sinne
-                            anspricht: starke Designs, verständliche Webseiten
-                            und die visuelle Aufbereitung von Inhalten. Ich bin
-                            fest davon überzeugt, dass gutes Design kein Luxus
-                            ist, sondern branchenübergreifend den feinen
-                            Unterschied ausmacht.
-                        </p>
-
-                        <div class="pt-2">
-                            <a
-                                href="about"
-                                class="inline-flex items-center gap-2 text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 font-bold uppercase text-sm group/link"
-                            >
-                                Mehr über mich erfahren
-                                <span
-                                    class="inline-block duration-300 group-hover/link:translate-x-2 text-lg leading-none"
-                                    >➔</span
-                                >
-                            </a>
-                        </div>
+                    <div class="flex flex-col sm:flex-row items-center gap-4 pt-4 w-full">
+                        <a data-key="index.show-logged-out.loginbtn" href="#" id="loginNavBtn"
+                            class="w-full text-center bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition">index.show-logged-out.loginbtn</a>
+                        <a data-key="index.show-logged-out.signupbtn" href="#" id="signupNavBtn"
+                            class="w-full text-center bg-gray-600 hover:bg-gray-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition">index.show-logged-out.signupbtn</a>
                     </div>
                 </section>
             </div>
-            <div class="lg:col-span-4"></div>
-        </main>
+        </section>
+    </main>
 
-        <!-- footer -->
-        <footer id="footer"></footer>
+    <main class="flex-grow max-w-7xl w-full mx-auto pt-8 pb-8 px-4 space-y-8 show-logged-in">
 
-        <!-- cookie banner -->
-        <div id="cookieBanner"></div>
+        <section id="dashboard-view" class="space-y-8">
+            <div class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-6">
+                <h2 data-key="index.dashboard.title"
+                    class="text-2xl font-bold text-gray-900 dark:text-white uppercase tracking-wide">
+                    index.dashboard.title
+                </h2>
 
-        <!-- Modals -->
-        <div id="loginModalContainer"></div>
-        <div id="signupModalContainer"></div>
-        <div id="forgotModalContainer"></div>
-        <div id="resetPasswordModalContainer"></div>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button id="btnCreateNewTrip"
+                        class="w-full bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
+                        <span data-key="index.dashboard.create_btn">index.dashboard.create_btn</span>
+                    </button>
+                    <button id="btnJoinTrip"
+                        class="w-full bg-gray-600 hover:bg-gray-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
+                        <span data-key="index.dashboard.join_btn">index.dashboard.join_btn</span>
+                    </button>
+                </div>
+            </div>
 
-        <!-- Scripts -->
-        <script src="js/page-elements/header.js"></script>
-        <script src="js/page-elements/footer.js"></script>
-        <script src="js/page-elements/cookie-banner.js"></script>
-        <script src="js/theme.js"></script>
-        <script src="js/modals.js"></script>
-        <script src="js/translation.js"></script>
-        <script src="js/script.js"></script>
-        <script type="module" src="js/firebase/firebase-init.js"></script>
-        <script type="module" src="js/firebase/firebase-auth.js"></script>
-        <script type="module" src="js/firebase/firebase-profile.js"></script>
-    </body>
+            <div class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-4">
+                <h3 data-key="index.dashboard.past_trips" class="text-xl font-bold text-gray-900 dark:text-white">
+                    index.dashboard.past_trips
+                </h3>
+                <div id="past-trips-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <p class="text-sm text-gray-500 dark:text-gray-400 italic" data-key="index.dashboard.no_trips">
+                        index.dashboard.no_trips
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="active-trip-view" class="hidden max-w-2xl mx-auto space-y-6">
+
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 space-y-3">
+                <div class="flex justify-between items-center">
+                    <span class="bg-green-100 text-green-800 text-xs px-2.5 py-1 rounded-full font-bold uppercase"
+                        data-key="index.trip.active_status">
+                        index.trip.active_status
+                    </span>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">
+                        Code: <span id="trip-invite-code"
+                            class="font-mono font-bold text-red-600 dark:text-red-400">XXXXXX</span>
+                    </p>
+                </div>
+                <h2 id="active-trip-title" class="text-2xl font-black text-gray-900 dark:text-white">
+                    Loading...
+                </h2>
+                <div class="flex gap-2">
+                    <button id="btnShareTrip"
+                        class="flex-1 text-xs bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-white px-3 py-2 rounded transition"
+                        data-key="index.trip.share_btn">
+                        index.trip.share_btn
+                    </button>
+                    <button id="btnEndTrip"
+                        class="flex-1 text-xs bg-red-100 hover:bg-red-200 text-red-700 px-3 py-2 rounded transition"
+                        data-key="index.trip.end_btn">
+                        index.trip.end_btn
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2"
+                    data-key="index.trip.current_location">
+                    index.trip.current_location
+                </h3>
+                <div class="flex items-center space-x-2">
+                    <span class="flex h-3 w-3 relative">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                    </span>
+                    <h4 id="current-station-name" class="text-2xl font-black text-gray-900 dark:text-white">
+                        Zürich HB
+                    </h4>
+                </div>
+            </div>
+
+            <div id="step-1-destination"
+                class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border-l-4 border-red-600">
+                <span class="text-xs font-bold bg-red-100 text-red-700 px-2 py-0.5 rounded-full"
+                    data-key="index.steps.step1">index.steps.step1</span>
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white mt-2" data-key="index.steps.dest_title">
+                    index.steps.dest_title</h3>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mb-4" data-key="index.steps.dest_desc">
+                    index.steps.dest_desc</p>
+                <button id="btnRollDestination"
+                    class="w-full bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-4 py-2 rounded transition"
+                    data-key="index.steps.dest_btn">
+                    index.steps.dest_btn
+                </button>
+            </div>
+
+            <div id="step-2-connection"
+                class="hidden bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border-l-4 border-gray-400">
+                <span class="text-xs font-bold bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full"
+                    data-key="index.steps.step2">index.steps.step2</span>
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white mt-2" data-key="index.steps.conn_title">
+                    index.steps.conn_title</h3>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mb-4" data-key="index.steps.conn_desc">
+                    index.steps.conn_desc</p>
+                <div id="connection-details"
+                    class="p-4 bg-gray-50 dark:bg-gray-900 rounded text-sm text-gray-700 dark:text-gray-300"></div>
+            </div>
+
+            <div id="step-3-stations"
+                class="hidden bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border-l-4 border-blue-600">
+                <span class="text-xs font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full"
+                    data-key="index.steps.step3">index.steps.step3</span>
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white mt-2" data-key="index.steps.stat_title">
+                    index.steps.stat_title</h3>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mb-4" data-key="index.steps.stat_desc">
+                    index.steps.stat_desc</p>
+                <button id="btnRollStationCount"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded transition"
+                    data-key="index.steps.stat_btn">
+                    index.steps.stat_btn
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- footer -->
+    <footer id="footer"></footer>
+
+    <!-- cookie banner -->
+    <div id="cookieBanner"></div>
+
+    <!-- Modals -->
+    <div id="loginModalContainer"></div>
+    <div id="signupModalContainer"></div>
+    <div id="forgotModalContainer"></div>
+    <div id="resetPasswordModalContainer"></div>
+
+    <!-- Scripts -->
+    <script src="js/page-elements/header.js"></script>
+    <script src="js/page-elements/footer.js"></script>
+    <script src="js/page-elements/cookie-banner.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/modals.js"></script>
+    <script src="js/translation.js"></script>
+    <script src="js/script.js"></script>
+    <script type="module" src="js/firebase/firebase-init.js"></script>
+    <script type="module" src="js/firebase/ui/auth-ui.js"></script>
+    <script type="module" src="js/firebase/ui/profile-ui.js"></script>
+</body>
+
 </html>

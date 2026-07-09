@@ -27,16 +27,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// Den Hintergrund-Helfer für die App aktivieren
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
         navigator.serviceWorker
             .register("/sw.js")
-            .then((reg) =>
-                console.log("Hintergrund-Helfer erfolgreich gestartet", reg),
-            )
-            .catch((err) =>
-                console.log("Fehler beim Starten des Helfers", err),
-            );
+            .then((reg) => console.log("ServiceWorker online", reg))
+            .catch((err) => console.log("ServiceWorker offline", err));
     });
 }
