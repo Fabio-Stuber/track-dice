@@ -60,6 +60,17 @@
         "label": "Nouveau mot de passe",
         "btn": "Enregistrer le mot de passe"
     },
+    "error404": {
+        "meta": {
+            "title": "404 - Page non trouvée | Lancé de rails",
+            "description": "Malheureusement, cette page n'a pas pu être trouvée.",
+            "locale": "fr_CH"
+        },
+        "code": "404",
+        "title": "Signal d'arrêt ! Page non trouvée",
+        "description": "Nous sommes désolés, mais cette voie ne mène nulle part. La page que vous recherchez a peut-être été déplacée, supprimée ou n'existe plus.",
+        "button": "Retour à la page d'accueil"
+    },
     "index": {
         "meta": {
             "title": "Lancé de rails - Votre aventure aléatoire sur les rails",

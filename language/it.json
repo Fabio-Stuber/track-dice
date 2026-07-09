@@ -60,6 +60,17 @@
         "label": "Nuova password",
         "btn": "Salva password"
     },
+    "error404": {
+        "meta": {
+            "title": "404 - Pagina non trovata | Lancio dei Binari",
+            "description": "Purtroppo non è stato possibile trovare questa pagina.",
+            "locale": "it_CH"
+        },
+        "code": "404",
+        "title": "Segnale di stop! Pagina non trovata",
+        "description": "Ci dispiace, ma questo binario porta nel vuoto. La pagina che stai cercando potrebbe essere stata spostata, eliminata o non esiste più.",
+        "button": "Torna alla pagina iniziale"
+    },
     "index": {
         "meta": {
             "title": "Lancio dei Binari - La tua avventura casuale sulle rotaie",

@@ -1,0 +1,85 @@
+<!doctype html>
+<html class="scroll-smooth no-copy" lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title data-key="error404.meta.title">
+        error404.meta.title
+    </title>
+    <meta name="error404.meta.description" data-key="meta_description" content="error404.meta.description" />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="icon" type="image/svg+xml" href="img/logo-track-dice.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400..900&display=swap" rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+        @custom-variant dark (&:where(.dark, .dark *));
+            @theme {
+                --font-sans: "Maven Pro", sans-serif;
+            }
+        </style>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="font-sans flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900">
+    <!-- Navigation -->
+    <header id="header"></header>
+
+    <!-- Hauptinhalt -->
+    <main class="grow flex items-center justify-center p-8">
+        <div class="text-center max-w-7xl mx-auto space-y-6">
+            <!-- Grosse Zahl -->
+            <h1 data-key="error404.code" class="text-8xl font-black text-red-600 dark:text-red-500">
+                error404.code
+            </h1>
+
+            <!-- Titel -->
+            <h2 data-key="error404.title" class="text-lg md:text-2xl font-bold text-gray-800 dark:text-white uppercase">
+                error404.title </h2>
+
+            <!-- Beschreibung -->
+            <p data-key="error404.description" class="text-xs text-gray-600 dark:text-gray-400 text-pretty">
+                error404.description
+            </p>
+
+            <!-- Button -->
+            <div class="pt-4">
+                <a data-key="error404.button" href="index.html"
+                    class="inline-block bg-red-600 hover:bg-red-700 text-white rounded-sm px-6 py-3 text-sm font-medium transition uppercase shadow-sm">
+                    error404.button
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Fusszeile -->
+    <footer id="footer"></footer>
+
+    <!-- Cookie-Banner -->
+    <div id="cookieBanner"></div>
+
+    <!-- Modals (für Login/Registrierung falls aus Header aufgerufen) -->
+    <div id="loginModalContainer"></div>
+    <div id="signupModalContainer"></div>
+    <div id="forgotModalContainer"></div>
+    <div id="resetPasswordModalContainer"></div>
+
+    <!-- Skripte -->
+    <script src="js/page-elements/header.js"></script>
+    <script src="js/page-elements/footer.js"></script>
+    <script src="js/page-elements/cookie-banner.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/modals.js"></script>
+    <script src="js/translation.js"></script>
+    <script src="js/script.js"></script>
+    <script type="module" src="js/firebase/firebase-init.js"></script>
+    <script type="module" src="js/firebase/firebase-auth.js"></script>
+    <script type="module" src="js/firebase/firebase-profile.js"></script>
+</body>
+
+</html>

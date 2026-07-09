@@ -60,6 +60,17 @@
         "label": "Neues Passwort",
         "btn": "Passwort speichern"
     },
+    "error404": {
+        "meta": {
+            "title": "404 - Seite nicht gefunden | Gleiswürfeln",
+            "description": "Diese Seite konnte leider nicht gefunden werden.",
+            "locale": "de_CH"
+        },
+        "code": "404",
+        "title": "Haltesignal! Seite nicht gefunden",
+        "description": "Es tut uns leid, aber diese Schiene führt ins Leere. Die gesuchte Seite wurde möglicherweise verschoben, gelöscht oder existiert nicht mehr.",
+        "button": "Zurück zur Startseite"
+    },
     "index": {
         "meta": {
             "title": "Gleiswürfeln - Dein Zufallsabenteuer auf der Schiene",

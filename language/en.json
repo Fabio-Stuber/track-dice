@@ -60,6 +60,17 @@
         "label": "New password",
         "btn": "Save password"
     },
+    "error404": {
+        "meta": {
+            "title": "404 - Page not found | Track Dice",
+            "description": "Unfortunately, this page could not be found.",
+            "locale": "en_CH"
+        },
+        "code": "404",
+        "title": "Stop signal! Page not found",
+        "description": "We are sorry, but this track leads to nowhere. The page you are looking for might have been moved, deleted, or no longer exists.",
+        "button": "Back to homepage"
+    },
     "index": {
         "meta": {
             "title": "Track Dice - Your random adventure on the rails",
