@@ -1,0 +1,37 @@
+<div id="forgotModal"
+    class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-md">
+
+    <div class="w-full max-w-md shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-4 relative">
+        <button id="closeForgotBtn"
+            class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:hover:text-white cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+        </button>
+
+        <h2 data-key="forgot.title" class="text-2xl font-bold text-gray-900 dark:text-white mb-2 uppercase text-center">
+            forgot.title</h2>
+            
+        <p data-key="forgot.text" class="text-xs text-gray-600 dark:text-gray-400 text-center mb-4">
+            forgot.text</p>
+
+        <form id="forgotForm" class="space-y-4">
+            <div>
+                <label data-key="forgot.email"
+                    class="block text-sm font-medium text-red-600 dark:text-white mb-1">forgot.email</label>
+                <input type="email" id="forgotEmail" required
+                    class="w-full px-5 py-2.5 rounded-sm border border-gray-900 dark:border-gray-100 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-gray-900 dark:focus:ring-gray-100" />
+            </div>
+
+            <button data-key="forgot.btn" type="submit"
+                class="mt-4 w-full text-center bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition">
+                forgot.btn
+            </button>
+        </form>
+
+        <p class="text-sm text-center text-gray-900 dark:text-white mt-4">
+            <button id="switchToLoginFromForgot" class="text-red-600 hover:underline cursor-pointer" data-key="forgot.back">forgot.back</button>
+        </p>
+    </div>
+</div>

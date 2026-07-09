@@ -1,0 +1,98 @@
+{
+    "header": {
+        "title": "Gleiswürfeln",
+        "subtitle": "Dein Zufallsabenteuer auf der Schiene",
+        "login": "Anmelden",
+        "account": "Profil bearbeiten",
+        "logout": "Ausloggen"
+    },
+    "footer": {
+        "copyright": "&copy; <span id=\"copyrightYear\"></span> Fabio Stuber. Alle Rechte vorbehalten. <br> Entwickelt für Bahnbegeisterte. Keine offizielle SBB-App.",
+        "created_by": "ERSTELLT MIT ❤️ VON <a href=\"https://www.fabio-stuber.com\" class=\"hover:underline transition duration-200\">FABIO STUBER</a>",
+        "imprint": "Impressum",
+        "privacy": "Datenschutz"
+    },
+    "login": {
+        "title": "Anmelden",
+        "email": "E-mail Adresse",
+        "password": "Passwort",
+        "forgotpassword": "Passwort vergessen?",
+        "btn": "Anmelden",
+        "or": "oder",
+        "googlebtn": "Mit Google anmelden",
+        "switch": "Hast du noch kein Konto?",
+        "switchbtn": "Hier registrieren"
+    },
+    "signup": {
+        "title": "Registrieren",
+        "firstname": "Vorname",
+        "lastname": "Nachname",
+        "email": "E-mail Adresse",
+        "password": "Passwort",
+        "passwordinfo": "Mindestens 12 Zeichen, darunter Gross- und Kleinbuchstaben, Zahlen und Sonderzeichen",
+        "btn": "Registrieren",
+        "switch": "Haben Sie bereits ein Konto?",
+        "switchbtn": "Hier Anmelden"
+    },
+    "forgot": {
+        "title": "Passwort zurücksetzen",
+        "text": "Geben Sie Ihre E-Mail-Adresse ein. Wir senden Ihnen einen Link zu.",
+        "email": "E-Mail-Adresse",
+        "btn": "Link senden",
+        "back": "Zurueck zum Login"
+    },
+    "index": {
+        "meta": {
+            "title": "Gleiswürfeln - Dein Zufallsabenteuer auf der Schiene",
+            "description": "Erlebe ein spannendes Zufallsabenteuer mit dem Gleiswürfeln!",
+            "locale": "de_CH"
+        },
+        "show-logged-out": {
+            "title": "Dein  Zufälliges <br> Zugabenteuer",
+            "description": "Bereit für ein neues Abenteuer auf der Schiene? Bei Gleiswürfeln bestimmen allein die Würfel die Route deines Zuges. Schnapp dir die Würfel und leg gleich los: Starte dein zufälliges Zugabenteuer! ",
+            "loginbtn": "Anmelden",
+            "signupbtn": "Konto erstellen"
+        },
+        "show-logged-in": {
+            "title": "Dein  Zufälliges <br> Zugabenteuer",
+            "description": "Bereit für ein neues Abenteuer auf der Schiene? Bei Gleiswürfeln bestimmen allein die Würfel die Route deines Zuges. Schnapp dir die Würfel und leg gleich los: Starte dein zufälliges Zugabenteuer! ",
+            "loginbtn": "Anmelden",
+            "signupbtn": "Konto erstellen"
+        }
+    },
+    "account": {
+        "meta": {
+            "title": "Konto | Gleiswürfeln",
+            "description": "Erlebe ein spannendes Zufallsabenteuer mit dem Gleiswürfeln!",
+            "locale": "de_CH"
+        },
+        "title": "Benutzer Konto",
+        "upload_image": "Bild Hochladen",
+        "edit": {
+            "title": "Konto Bearbeiten",
+            "firstname": "Vorname",
+            "lastname": "Nachname",
+            "displayname": "Anzeigename",
+            "email": "E-mail Adresse",
+            "language": "Sprache",
+            "sbbpass": "SBB Abonnement",
+            "sbbpass1": "Kein Abonnement",
+            "sbbpass2": "Halbtax (1/2)",
+            "sbbpass3": "Generalabonnement (GA)",
+            "password": "Neues Passwort",
+            "passwordinfo": "Lassen Sie das Feld leer, wenn Sie es nicht ändern möchten. <br> Mindestens 12 Zeichen, darunter Gross- und Kleinbuchstaben, Zahlen und Sonderzeichen",
+            "cancel": "Zurück",
+            "save": "Änderungen Speichern"
+        },
+        "role": {
+            "role": "Konto Bearbeiten",
+            "subscription": "Abonnement",
+            "upgrade": "Upgrade"
+        },
+        "danger": {
+            "title": "Gefahrenzone",
+            "description": "Wenn Sie Ihr Konto löschen, werden alle Ihre Daten endgültig gelöscht.",
+            "delete": "Konto löschen"
+        }
+    }
+}

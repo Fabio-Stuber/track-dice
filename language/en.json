@@ -1,0 +1,66 @@
+{
+    "header": {
+        "title": "Track Dice",
+        "subtitle": "Your random adventure on the rails",
+        "login": "LOGIN",
+        "account": "Edit Account",
+        "logout": "Log out"
+    },
+    "footer": {
+        "copyright": "&copy; <span id=\"copyrightYear\"></span> Fabio Stuber. All rights reserved. <br> Developed for train fans. Not an official SBB app.",
+        "created_by": "CREATED WITH ❤️ BY <a href=\"https://www.fabio-stuber.com\" class=\"hover:underline transition duration-200\">FABIO STUBER</a>",
+        "impressum": "Legal Notice",
+        "privacy": "Privacy Policy"
+    },
+    "login": {
+        "title": "Sign in to Track Dice",
+        "email": "Email address",
+        "password": "Password",
+        "btn": "Login",
+        "googlebtn": "Sign in with Google",
+        "switch": "Don't have an account yet?",
+        "switchbtn": "Register here"
+    },
+    "index": {
+        "meta": {
+            "title": "Track Dice - Your random adventure on the rails",
+            "description": "Experience an exciting random adventure with Track Dice!",
+            "locale": "en_CH"
+        }
+    },
+    "account": {
+        "meta": {
+            "title": "Account | Track Dice",
+            "description": "Experience an exciting random adventure with Track Dice!",
+            "locale": "en_CH"
+        },
+        "title": "User Account",
+        "upload_image": "Upload Image",
+        "edit": {
+            "title": "Edit Account",
+            "firstname": "First name",
+            "lastname": "Last name",
+            "displayname": "Display name",
+            "email": "Email address",
+            "language": "Language",
+            "sbbpass": "SBB Travelpass",
+            "sbbpass1": "No travelpass",
+            "sbbpass2": "Half Fare Travelcard (1/2)",
+            "sbbpass3": "GA Travelcard (GA)",
+            "password": "New password",
+            "passwordinfo": "Leave this field empty if you do not want to change it. <br> At least 12 characters, including upper and lower case letters, numbers and special characters",
+            "cancel": "Back",
+            "save": "Save Changes"
+        },
+        "role": {
+            "role": "Edit Account",
+            "subscription": "Subscription",
+            "upgrade": "Upgrade"
+        },
+        "danger": {
+            "title": "Danger Zone",
+            "description": "If you delete your account, all your data will be permanently deleted.",
+            "delete": "Delete account"
+        }
+    }
+}
