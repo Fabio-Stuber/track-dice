@@ -1,0 +1,117 @@
+{
+    "header": {
+        "title": "Lancio dei Binari",
+        "subtitle": "La tua avventura casuale sulle rotaie",
+        "login": "Accedi",
+        "installApp": "Installa l'applicazione",
+        "account": "Modifica profilo",
+        "logout": "Disconnetti"
+    },
+    "footer": {
+        "copyright": "&copy; <span id=\"copyrightYear\"></span> Fabio Stuber. Tutti i diritti riservati. <br> Sviluppato per gli appassionati di treni. Non è un'applicazione ufficiale delle FFS.",
+        "created_by": "CREATO CON ❤️ DA <a href=\"https://www.fabio-stuber.com\" class=\"hover:underline transition duration-200\">FABIO STUBER</a>",
+        "imprint": "Note legali",
+        "privacy": "Protezione dei dati",
+        "terms": "Condizioni generali"
+    },
+    "cookie-banner": {
+        "title": "Impostazioni dei cookie",
+        "text": "Questo sito web utilizza i cookie per consentirci di offrirle la migliore esperienza utente possibile.",
+        "privacy": "Informativa sulla privacy",
+        "accept": "Accetta tutti",
+        "decline": "Rifiuta tutti",
+        "required": "Cookie necessari",
+        "functional": "Cookie funzionali",
+        "analytics": "Cookie di analisi",
+        "marketing": "Cookie di marketing"
+    },
+    "login": {
+        "title": "Accedi",
+        "email": "Indirizzo e-mail",
+        "password": "Password",
+        "forgotpassword": "Password dimenticata?",
+        "btn": "Accedi",
+        "or": "o",
+        "googlebtn": "Accedi con Google",
+        "switch": "Non hai ancora un account?",
+        "switchbtn": "Registrati qui"
+    },
+    "signup": {
+        "title": "Registrati",
+        "firstname": "Nome",
+        "lastname": "Cognome",
+        "email": "Indirizzo e-mail",
+        "password": "Password",
+        "passwordinfo": "Almeno 12 caratteri, incluse lettere maiuscole e minuscole, numeri e caratteri speciali",
+        "btn": "Registrati",
+        "switch": "Hai già un account?",
+        "switchbtn": "Accedi qui"
+    },
+    "forgot": {
+        "title": "Reimposta la password",
+        "text": "Inserisci il tuo indirizzo e-mail. Ti invieremo un link.",
+        "email": "Indirizzo e-mail",
+        "btn": "Invia link",
+        "back": "Torna al login"
+    },
+    "reset": {
+        "title": "Nuova password",
+        "text": "Inserisci la tua nuova password.",
+        "label": "Nuova password",
+        "btn": "Salva password"
+    },
+    "index": {
+        "meta": {
+            "title": "Lancio dei Binari - La tua avventura casuale sulle rotaie",
+            "description": "Vivi un'emozionante avventura casuale con Lancio dei Binari!",
+            "locale": "it_CH"
+        },
+        "show-logged-out": {
+            "title": "La tua avventura <br> in treno casuale",
+            "description": "Pronto per una nuova avventura sulle rotaie? Con Lancio dei Binari, solo i dadi scelgono il percorso del tuo treno. Prendi i dadi e comincia subito: inizia la tua avventura in treno casuale!",
+            "loginbtn": "Accedi",
+            "signupbtn": "Crea un account"
+        },
+        "show-logged-in": {
+            "title": "La tua avventura <br> in treno casuale",
+            "description": "Pronto per una nuova avventura sulle rotaie? Con Lancio dei Binari, solo i dadi scelgono il percorso del tuo treno. Prendi i dadi e comincia subito: inizia la tua avventura in treno casuale!",
+            "loginbtn": "Accedi",
+            "signupbtn": "Crea un account"
+        }
+    },
+    "account": {
+        "meta": {
+            "title": "Account | Lancio dei Binari",
+            "description": "Vivi un'emozionante avventura casuale con Lancio dei Binari!",
+            "locale": "it_CH"
+        },
+        "title": "Account utente",
+        "upload_image": "Carica immagine",
+        "edit": {
+            "title": "Modifica account",
+            "firstname": "Nome",
+            "lastname": "Cognome",
+            "displayname": "Nome visualizzato",
+            "email": "Indirizzo e-mail",
+            "language": "Lingua",
+            "sbbpass": "Abbonamento FFS",
+            "sbbpass1": "Nessun abbonamento",
+            "sbbpass2": "Metà prezzo (1/2)",
+            "sbbpass3": "Abbonamento generale (AG)",
+            "password": "Nuova password",
+            "passwordinfo": "Lascia il campo vuoto se non desideri modificarlo. <br> Almeno 12 caratteri, incluse lettere maiuscole e minuscole, numeri e caratteri speciali",
+            "cancel": "Indietro",
+            "save": "Salva modifiche"
+        },
+        "role": {
+            "role": "Modifica account",
+            "subscription": "Abbonamento",
+            "upgrade": "Aggiorna"
+        },
+        "danger": {
+            "title": "Zona di pericolo",
+            "description": "Se cancelli il tuo account, tutti i tuoi dati verranno eliminati per sempre.",
+            "delete": "Elimina account"
+        }
+    }
+}

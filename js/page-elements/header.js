@@ -1,4 +1,6 @@
-// Wir speichern das Laden in einer Variable, damit andere Skripte darauf warten können
+// Variable ausserhalb speichern, da das Event sehr frueh feuern kann
+let deferredPrompt = null;
+
 window.headerLoaded = fetch("page-elements/header.html")
     .then((response) => response.text())
     .then((data) => {
@@ -9,6 +11,11 @@ window.headerLoaded = fetch("page-elements/header.html")
             initHeaderScripts();
             if (typeof darkMode === "function") darkMode();
             mobileMenu();
+
+            // Logik fuer den Installations-Button wird erst hier gestartet,
+            // wenn das HTML wirklich im Browser existiert
+            initInstallButton();
+
             if (typeof loadAuthModals === "function") loadAuthModals();
         }
     })
@@ -83,3 +90,52 @@ function mobileMenu() {
         }
     });
 }
+
+// 1. Dieses Event hoert im Hintergrund zu, ob die App installiert werden kann
+window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+
+    // Falls der Header schon fertig geladen sein sollte, zeigen wir den Button direkt an
+    const installButton = document.getElementById("install-button");
+    if (installButton) {
+        installButton.classList.remove("hidden");
+    }
+});
+
+// 2. Diese Funktion aktiviert die Button-Logik, sobald das HTML bereit ist
+function initInstallButton() {
+    const installButton = document.getElementById("install-button");
+
+    if (installButton) {
+        // Falls das Event oben schon gefeuert hat, bevor das HTML da war,
+        // machen wir den Button jetzt sichtbar
+        if (deferredPrompt) {
+            installButton.classList.remove("hidden");
+        }
+
+        installButton.addEventListener("click", async () => {
+            if (!deferredPrompt) return;
+
+            // Oeffnet das Installationsfenster des Browsers
+            deferredPrompt.prompt();
+
+            // Warten auf die Entscheidung des Nutzers
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log(`Nutzer-Entscheidung: ${outcome}`);
+
+            // Prompt loeschen und Button verstecken
+            deferredPrompt = null;
+            installButton.classList.add("hidden");
+        });
+    }
+}
+
+// 3. Wenn die App erfolgreich installiert wurde (auch ueber das Browser-Menue)
+window.addEventListener("appinstalled", (evt) => {
+    console.log("Track Dice wurde erfolgreich installiert!");
+    const installButton = document.getElementById("install-button");
+    if (installButton) {
+        installButton.classList.add("hidden");
+    }
+});

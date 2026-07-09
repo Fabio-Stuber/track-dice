@@ -1,0 +1,117 @@
+{
+    "header": {
+        "title": "Lancé de rails",
+        "subtitle": "Votre aventure aléatoire sur les rails",
+        "login": "Se connecter",
+        "installApp": "Installer l'application",
+        "account": "Modifier le profil",
+        "logout": "Se déconnecter"
+    },
+    "footer": {
+        "copyright": "&copy; <span id=\"copyrightYear\"></span> Fabio Stuber. Tous droits réservés. <br> Développé pour les passionnés de train. Ceci n'est pas une application officielle des CFF.",
+        "created_by": "CRÉÉ AVEC ❤️ PAR <a href=\"https://www.fabio-stuber.com\" class=\"hover:underline transition duration-200\">FABIO STUBER</a>",
+        "imprint": "Mentions légales",
+        "privacy": "Protection des données",
+        "terms": "CGV"
+    },
+    "cookie-banner": {
+        "title": "Paramètres des cookies",
+        "text": "Ce site web utilise des cookies afin que nous puissions vous offrir la meilleure expérience utilisateur possible.",
+        "privacy": "Politique de confidentialité",
+        "accept": "Tout accepter",
+        "decline": "Tout refuser",
+        "required": "Cookies nécessaires",
+        "functional": "Cookies fonctionnels",
+        "analytics": "Cookies d'analyse",
+        "marketing": "Cookies de marketing"
+    },
+    "login": {
+        "title": "Se connecter",
+        "email": "Adresse e-mail",
+        "password": "Mot de passe",
+        "forgotpassword": "Mot de passe oublié ?",
+        "btn": "Se connecter",
+        "or": "ou",
+        "googlebtn": "Se connecter avec Google",
+        "switch": "Vous n'avez pas encore de compte ?",
+        "switchbtn": "S'inscrire ici"
+    },
+    "signup": {
+        "title": "S'inscrire",
+        "firstname": "Prénom",
+        "lastname": "Nom",
+        "email": "Adresse e-mail",
+        "password": "Mot de passe",
+        "passwordinfo": "Au moins 12 caractères, avec des lettres majuscules et minuscules, des chiffres et des caractères spéciaux",
+        "btn": "S'inscrire",
+        "switch": "Vous avez déjà un compte ?",
+        "switchbtn": "Se connecter ici"
+    },
+    "forgot": {
+        "title": "Réinitialiser le mot de passe",
+        "text": "Entrez votre adresse e-mail. Nous vous enverrons un lien.",
+        "email": "Adresse e-mail",
+        "btn": "Envoyer le lien",
+        "back": "Retour à la connexion"
+    },
+    "reset": {
+        "title": "Nouveau mot de passe",
+        "text": "Veuillez entrer votre nouveau mot de passe.",
+        "label": "Nouveau mot de passe",
+        "btn": "Enregistrer le mot de passe"
+    },
+    "index": {
+        "meta": {
+            "title": "Lancé de rails - Votre aventure aléatoire sur les rails",
+            "description": "Vivez une aventure aléatoire passionnante avec Lancé de rails !",
+            "locale": "fr_CH"
+        },
+        "show-logged-out": {
+            "title": "Votre aventure <br> ferroviaire aléatoire",
+            "description": "Prêt pour une nouvelle aventure sur les rails ? Avec Lancé de rails, ce sont les dés qui choisissent le parcours de votre train. Prenez les dés et commencez tout de suite : lancez votre aventure ferroviaire aléatoire !",
+            "loginbtn": "Se connecter",
+            "signupbtn": "Créer un compte"
+        },
+        "show-logged-in": {
+            "title": "Votre aventure <br> ferroviaire aléatoire",
+            "description": "Prêt pour une nouvelle aventure sur les rails ? Avec Lancé de rails, ce sont les dés qui choisissent le parcours de votre train. Prenez les dés et commencez tout de suite : lancez votre aventure ferroviaire aléatoire !",
+            "loginbtn": "Se connecter",
+            "signupbtn": "Créer un compte"
+        }
+    },
+    "account": {
+        "meta": {
+            "title": "Compte | Lancé de rails",
+            "description": "Vivez une aventure aléatoire passionnante avec Lancé de rails !",
+            "locale": "fr_CH"
+        },
+        "title": "Compte utilisateur",
+        "upload_image": "Télécharger une image",
+        "edit": {
+            "title": "Modifier le compte",
+            "firstname": "Prénom",
+            "lastname": "Nom",
+            "displayname": "Nom d'affichage",
+            "email": "Adresse e-mail",
+            "language": "Langue",
+            "sbbpass": "Abonnement CFF",
+            "sbbpass1": "Aucun abonnement",
+            "sbbpass2": "Demi-tarif (1/2)",
+            "sbbpass3": "Abonnement général (AG)",
+            "password": "Nouveau mot de passe",
+            "passwordinfo": "Laissez ce champ vide si vous ne voulez pas le changer. <br> Au moins 12 caractères, avec des lettres majuscules et minuscules, des chiffres et des caractères spéciaux",
+            "cancel": "Retour",
+            "save": "Enregistrer les modifications"
+        },
+        "role": {
+            "role": "Modifier le compte",
+            "subscription": "Abonnement",
+            "upgrade": "Mettre à niveau"
+        },
+        "danger": {
+            "title": "Zone de danger",
+            "description": "Si vous supprimez votre compte, toutes vos données seront définitivement effacées.",
+            "delete": "Supprimer le compte"
+        }
+    }
+}

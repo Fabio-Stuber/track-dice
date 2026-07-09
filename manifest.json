@@ -1,0 +1,57 @@
+{
+    "short_name": "Track Dice",
+    "name": "Track Dice - Your random adventure on the rails",
+    "description": "Experience an exciting random adventure with Track Dice!",
+    "categories": ["games", "entertainment"],
+    "id": "/track-dice-game",
+    "icons": [
+        {
+            "src": "img/logo-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "img/logo-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "img/track-dice.jpg",
+            "sizes": "2846x1504",
+            "type": "image/jpeg",
+            "form_factor": "wide",
+            "label": "Track Dice auf dem PC"
+        },
+        {
+            "src": "img/track-dice.jpg",
+            "sizes": "2846x1504",
+            "type": "image/jpeg",
+            "form_factor": "narrow",
+            "label": "Track Dice auf dem Handy"
+        }
+    ],
+    "start_url": "index.html",
+    "background_color": "#F3F4F6",
+    "theme_color": "#E7000B",
+    "display": "standalone",
+    "orientation": "portrait",
+    "shortcuts": [
+        {
+            "name": "Mein Account",
+            "short_name": "Account",
+            "url": "account.html",
+            "description": "Öffne direkt deine Account-Einstellungen",
+            "icons": [
+                {
+                    "src": "img/logo-512.png",
+                    "sizes": "96x96",
+                    "type": "image/png"
+                }
+            ]
+        }
+    ]
+}

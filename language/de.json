@@ -3,6 +3,7 @@
         "title": "Gleiswürfeln",
         "subtitle": "Dein Zufallsabenteuer auf der Schiene",
         "login": "Anmelden",
+        "installApp": "App installieren",
         "account": "Profil bearbeiten",
         "logout": "Ausloggen"
     },
@@ -10,7 +11,19 @@
         "copyright": "&copy; <span id=\"copyrightYear\"></span> Fabio Stuber. Alle Rechte vorbehalten. <br> Entwickelt für Bahnbegeisterte. Keine offizielle SBB-App.",
         "created_by": "ERSTELLT MIT ❤️ VON <a href=\"https://www.fabio-stuber.com\" class=\"hover:underline transition duration-200\">FABIO STUBER</a>",
         "imprint": "Impressum",
-        "privacy": "Datenschutz"
+        "privacy": "Datenschutz",
+        "terms": "AGBs"
+    },
+    "cookie-banner": {
+        "title": "Cookie-Einstellungen",
+        "text": "Diese Webseite verwendet Cookies, damit wir Ihnen die bestmögliche Benutzererfahrung bieten können.",
+        "privacy": "Datenschutz",
+        "accept": "Alle akzeptieren",
+        "decline": "Alle ablehnen",
+        "required": "Benötigte Cookies",
+        "functional": "Funktionale Cookies",
+        "analytics": "Analyse-Cookies",
+        "marketing": "Marketing-Cookies"
     },
     "login": {
         "title": "Anmelden",

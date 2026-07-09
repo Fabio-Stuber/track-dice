@@ -7,7 +7,7 @@ fetch("page-elements/footer.html")
 
             setTimeout(() => {
                 initFooterScripts();
-            }, 100);
+            }, 1000);
         }
     });
 

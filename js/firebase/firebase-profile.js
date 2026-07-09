@@ -72,17 +72,34 @@ window.updateUserProfile = function (
 };
 
 window.initProfilePage = function () {
+    // Liste aller Seiten (Pathnames), die man OHNE Login anschauen darf
+    const publicPages = [
+        "/",
+        "/index",
+        "/imprint",
+        "/404",
+        "/terms",
+        "/privacy",
+        "/unsubscribe",
+    ];
+
     onAuthStateChanged(auth, async (user) => {
+        // Elemente der Profilseite suchen
+        const profileEmailInput = document.getElementById("profileEmail");
+
         if (user) {
-            document.getElementById("profileEmail").value = user.email || "";
-            document.getElementById("profileHeaderEmail").textContent =
-                user.email || "";
-            document.getElementById("profileDisplayName").value =
-                user.displayName || "";
-            document.getElementById("profileHeaderName").textContent =
-                user.displayName || "User";
-            document.getElementById("profilePreview").src =
-                "https://www.w3schools.com/howto/img_avatar.png";
+            if (profileEmailInput) {
+                document.getElementById("profileEmail").value =
+                    user.email || "";
+                document.getElementById("profileHeaderEmail").textContent =
+                    user.email || "";
+                document.getElementById("profileDisplayName").value =
+                    user.displayName || "";
+                document.getElementById("profileHeaderName").textContent =
+                    user.displayName || "User";
+                document.getElementById("profilePreview").src =
+                    "https://www.w3schools.com/howto/img_avatar.png";
+            }
 
             if (db) {
                 const userDocRef = doc(db, "users", user.uid);
@@ -90,29 +107,35 @@ window.initProfilePage = function () {
 
                 if (userDoc.exists()) {
                     const userData = userDoc.data();
-                    document.getElementById("profileFirstName").value =
-                        userData.firstName || "";
-                    document.getElementById("profileLastName").value =
-                        userData.lastName || "";
-                    document.getElementById("userRole").textContent =
-                        userData.role || "Member";
-                    document.getElementById("userSubscription").textContent =
-                        userData.subscription || "Free";
+
+                    if (profileEmailInput) {
+                        document.getElementById("profileFirstName").value =
+                            userData.firstName || "";
+                        document.getElementById("profileLastName").value =
+                            userData.lastName || "";
+                        document.getElementById("userRole").textContent =
+                            userData.role || "Member";
+                        document.getElementById(
+                            "userSubscription",
+                        ).textContent = userData.subscription || "Free";
+                    }
 
                     if (userData.language) {
-                        document.getElementById("profileLanguage").value =
-                            userData.language;
+                        if (profileEmailInput) {
+                            document.getElementById("profileLanguage").value =
+                                userData.language;
+                        }
                         if (typeof window.setLanguage === "function") {
                             window.setLanguage(userData.language);
                         }
                     }
 
-                    if (userData.sbbTarif) {
+                    if (userData.sbbTarif && profileEmailInput) {
                         document.getElementById("profileSbbTarif").value =
                             userData.sbbTarif;
                     }
 
-                    if (userData.avatarUrl) {
+                    if (userData.avatarUrl && profileEmailInput) {
                         document.getElementById("profilePreview").src =
                             userData.avatarUrl;
                     }
@@ -124,10 +147,14 @@ window.initProfilePage = function () {
                 window.setLanguage(localLang);
             }
 
-            if (
-                window.location.pathname !== "/" &&
-                window.location.pathname !== "/index.html"
-            ) {
+            // Aktuellen Pfad auslesen (z.B. "/impressum.html")
+            const currentPath = window.location.pathname;
+
+            // Pruefen, ob der aktuelle Pfad in der erlaubten Liste ist
+            const isPublicPage = publicPages.includes(currentPath);
+
+            // Wenn die Seite NICHT erlaubt ist, schicke den Gast zur Startseite
+            if (!isPublicPage) {
                 window.location.href = "/";
             }
         }
