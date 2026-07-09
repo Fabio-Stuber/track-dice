@@ -41,6 +41,12 @@
         "btn": "Link senden",
         "back": "Zurueck zum Login"
     },
+    "reset": {
+        "title": "Neues Passwort",
+        "text": "Geben Sie bitte Ihr neues Passwort ein.",
+        "label": "Neues Passwort",
+        "btn": "Passwort speichern"
+    },
     "index": {
         "meta": {
             "title": "Gleiswürfeln - Dein Zufallsabenteuer auf der Schiene",

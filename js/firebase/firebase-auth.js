@@ -5,35 +5,41 @@ import {
     signInWithPopup,
     onAuthStateChanged,
     signOut,
-    updateProfile, sendPasswordResetEmail
+    updateProfile,
+    sendPasswordResetEmail,
+    confirmPasswordReset,
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import {
+    doc,
+    setDoc,
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-// Funktion, um die Event-Listener an die Formulare zu haengen
 function initAuthFormListeners() {
-    // Handle login form submission
-    const loginForm = document.getElementById('loginForm');
+    const loginForm = document.getElementById("loginForm");
     if (loginForm) {
-        loginForm.addEventListener('submit', (e) => {
+        loginForm.addEventListener("submit", (e) => {
             e.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
 
             signInWithEmailAndPassword(auth, email, password)
-                .then(() => { window.location.reload(); }) // Aktuelle Seite aktualisieren
-                .catch((error) => { alert("Login failed: " + error.message); });
+                .then(() => {
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    alert("Login failed: " + error.message);
+                });
         });
     }
 
-    // Handle signup form submission
-    const signupForm = document.getElementById('signupForm');
+    const signupForm = document.getElementById("signupForm");
     if (signupForm) {
-        signupForm.addEventListener('submit', (e) => {
+        signupForm.addEventListener("submit", (e) => {
             e.preventDefault();
-            const firstName = document.getElementById('signupVorname').value;
-            const lastName = document.getElementById('signupNachname').value;
-            const email = document.getElementById('signupEmail').value;
-            const password = document.getElementById('signupPassword').value;
+            const firstName = document.getElementById("signupVorname").value;
+            const lastName = document.getElementById("signupNachname").value;
+            const email = document.getElementById("signupEmail").value;
+            const password = document.getElementById("signupPassword").value;
 
             let registeredUser = null;
 
@@ -41,7 +47,9 @@ function initAuthFormListeners() {
                 .then((userCredential) => {
                     registeredUser = userCredential.user;
                     const displayName = `${firstName} ${lastName}`.trim();
-                    return updateProfile(registeredUser, { displayName: displayName });
+                    return updateProfile(registeredUser, {
+                        displayName: displayName,
+                    });
                 })
                 .then(async () => {
                     if (db) {
@@ -52,90 +60,166 @@ function initAuthFormListeners() {
                             email: email,
                             role: "Member",
                             subscription: "Free",
-                            avatarUrl: "https://www.w3schools.com/howto/img_avatar.png",
+                            avatarUrl:
+                                "https://www.w3schools.com/howto/img_avatar.png",
                             language: "en",
-                            sbbTarif: "none"
+                            sbbTarif: "none",
                         });
                     }
                 })
                 .then(() => {
-                    window.location.reload(); // Aktuelle Seite aktualisieren
+                    window.location.reload();
                 })
                 .catch((error) => {
                     alert("Registration failed: " + error.message);
                 });
         });
-        const forgotForm = document.getElementById('forgotForm');
-        if (forgotForm) {
-            forgotForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const email = document.getElementById('forgotEmail').value;
+    }
 
-                sendPasswordResetEmail(auth, email)
-                    .then(() => {
-                        alert("Ein Link zum Zuruecksetzen des Passworts wurde an Ihre E-Mail-Adresse gesendet.");
-                        // Schliesst das Modal nach dem Erfolg automatisch
-                        if (typeof toggleModal === 'function') {
-                            toggleModal('forgotModal', false);
-                        }
-                    })
-                    .catch((error) => {
-                        alert("Fehler: " + error.message);
-                    });
-            });
+    const forgotForm = document.getElementById("forgotForm");
+    if (forgotForm) {
+        forgotForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const email = document.getElementById("forgotEmail").value;
+
+            sendPasswordResetEmail(auth, email)
+                .then(() => {
+                    alert(
+                        "Ein Link zum Zuruecksetzen des Passworts wurde an Ihre E-Mail-Adresse gesendet.",
+                    );
+                    const forgotModal = document.getElementById("forgotModal");
+                    if (forgotModal) forgotModal.classList.add("hidden");
+                })
+                .catch((error) => {
+                    alert("Fehler: " + error.message);
+                });
+        });
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const oobCode = urlParams.get("oobCode");
+
+    if (oobCode) {
+        if (oobCode === "test") {
+            const emailDisplay = document.getElementById("resetEmailDisplay");
+            if (emailDisplay) {
+                emailDisplay.textContent = "test-benutzer@beispiel.com";
+            }
+            const resetPasswordModal =
+                document.getElementById("resetPasswordModal");
+            if (resetPasswordModal) {
+                resetPasswordModal.classList.remove("hidden");
+            }
+        } else {
+            import("https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js")
+                .then(({ verifyPasswordResetCode }) => {
+                    return verifyPasswordResetCode(auth, oobCode);
+                })
+                .then((email) => {
+                    const emailDisplay =
+                        document.getElementById("resetEmailDisplay");
+                    if (emailDisplay) {
+                        emailDisplay.textContent = email;
+                    }
+                    const resetPasswordModal =
+                        document.getElementById("resetPasswordModal");
+                    if (resetPasswordModal) {
+                        resetPasswordModal.classList.remove("hidden");
+                    }
+                })
+                .catch((error) => {
+                    alert(
+                        "Der Link ist ungueltig oder abgelaufen: " +
+                            error.message,
+                    );
+                });
         }
     }
 
-    // Handle Google login button click
-    const googleBtn = document.getElementById('googleLoginBtn');
-    if (googleBtn) {
-        googleBtn.addEventListener('click', () => {
-            signInWithPopup(auth, googleProvider)
-                .then(() => { window.location.reload(); }) // Aktuelle Seite aktualisieren
-                .catch((error) => { alert("Google login failed: " + error.message); });
+    const resetPasswordForm = document.getElementById("resetPasswordForm");
+    if (resetPasswordForm) {
+        resetPasswordForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const newPassword = document.getElementById("newPassword").value;
+
+            if (!oobCode || oobCode === "test") {
+                alert(
+                    "Im Testmodus (oobCode=test) kann kein echtes Passwort gespeichert werden.",
+                );
+                return;
+            }
+
+            confirmPasswordReset(auth, oobCode, newPassword)
+                .then(() => {
+                    alert(
+                        "Ihr Passwort wurde erfolgreich geandert! Sie koennen sich jetzt einloggen.",
+                    );
+                    window.history.replaceState(
+                        {},
+                        document.title,
+                        window.location.pathname,
+                    );
+
+                    const resetPasswordModal =
+                        document.getElementById("resetPasswordModal");
+                    const loginModal = document.getElementById("loginModal");
+                    if (resetPasswordModal)
+                        resetPasswordModal.classList.add("hidden");
+                    if (loginModal) loginModal.classList.remove("hidden");
+                })
+                .catch((error) => {
+                    alert("Fehler beim Zuruecksetzen: " + error.message);
+                });
         });
     }
 }
 
-// Warten, bis page-elements.js meldet, dass die Modals im HTML existieren
-document.addEventListener('modalsLoaded', () => {
+document.addEventListener("modalsLoaded", () => {
     initAuthFormListeners();
 });
 
-
-// Monitor authentication state to update the header navigation
 onAuthStateChanged(auth, async (user) => {
-    // 1. Automatische Sichtbarkeit fuer Klassen umschalten
     updateVisibilityBasedOnAuth(user);
 
     const checkHeaderInterval = setInterval(async () => {
-        const loginNavBtns = document.querySelectorAll('#loginNavBtn, #profileMenuToggle');
+        const loginNavBtns = document.querySelectorAll(
+            "#loginNavBtn, #profileMenuToggle",
+        );
 
         if (loginNavBtns.length > 0) {
             clearInterval(checkHeaderInterval);
 
             if (user) {
-                // --- USER IST EINGELOGGT ---
                 let displayName = user.displayName || user.email;
-                let avatarUrl = 'https://www.w3schools.com/howto/img_avatar.png';
+                let avatarUrl =
+                    "https://www.w3schools.com/howto/img_avatar.png";
 
                 if (db) {
                     try {
-                        const { getDoc, doc } = await import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js");
+                        const { getDoc, doc } =
+                            await import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js");
                         const userDocRef = doc(db, "users", user.uid);
                         const userDoc = await getDoc(userDocRef);
 
                         if (userDoc.exists()) {
                             const userData = userDoc.data();
-                            if (userData.avatarUrl) avatarUrl = userData.avatarUrl;
-                            if (userData.displayName) displayName = userData.displayName;
+                            if (userData.avatarUrl)
+                                avatarUrl = userData.avatarUrl;
+                            if (userData.displayName)
+                                displayName = userData.displayName;
 
-                            if (userData.language && typeof window.setLanguage === 'function') {
+                            if (
+                                userData.language &&
+                                typeof window.setLanguage === "function"
+                            ) {
                                 window.setLanguage(userData.language);
                             }
                         }
                     } catch (error) {
-                        console.error("Error loading header profile image or language:", error);
+                        console.error(
+                            "Error loading header profile image or language:",
+                            error,
+                        );
                     }
                 }
 
@@ -163,57 +247,97 @@ onAuthStateChanged(auth, async (user) => {
                     </div>
                 `;
 
-                if (!document.getElementById('userProfileGroup')) {
-                    loginNavBtns.forEach(btn => {
+                if (!document.getElementById("userProfileGroup")) {
+                    loginNavBtns.forEach((btn) => {
                         btn.outerHTML = userHeaderHTML;
                     });
                 }
 
-                const menuToggle = document.getElementById('profileMenuToggle');
-                const dropdown = document.getElementById('profileDropdown');
-                const profileArrow = document.getElementById('profileArrow');
+                const dropdown = document.getElementById("profileDropdown");
+                const menuToggle = document.getElementById("profileMenuToggle");
 
                 if (menuToggle && dropdown) {
                     menuToggle.replaceWith(menuToggle.cloneNode(true));
-                    const newMenuToggle = document.getElementById('profileMenuToggle');
 
-                    newMenuToggle.addEventListener('click', (e) => {
+                    const newMenuToggle =
+                        document.getElementById("profileMenuToggle");
+                    const profileArrow =
+                        document.getElementById("profileArrow");
+
+                    newMenuToggle.addEventListener("click", (e) => {
                         e.stopPropagation();
                         e.preventDefault();
-                        const isClosed = dropdown.classList.contains('hidden');
+                        const isClosed = dropdown.classList.contains("hidden");
 
                         if (isClosed) {
-                            dropdown.classList.remove('hidden');
-                            if (profileArrow) profileArrow.classList.add('rotate-180');
+                            const mobileMenu =
+                                document.getElementById("mobileMenu");
+                            const mobileMenuToggle =
+                                document.getElementById("mobileMenuToggle");
+                            if (
+                                mobileMenu &&
+                                !mobileMenu.classList.contains("hidden")
+                            ) {
+                                mobileMenu.classList.add("hidden");
+
+                                const burgerIcon =
+                                    mobileMenuToggle?.querySelector(
+                                        ".burger-icon",
+                                    );
+                                const closeIcon =
+                                    mobileMenuToggle?.querySelector(
+                                        ".close-icon",
+                                    );
+                                if (burgerIcon && closeIcon) {
+                                    burgerIcon.classList.remove("hidden");
+                                    closeIcon.classList.add("hidden");
+                                }
+                            }
+
+                            dropdown.classList.remove("hidden");
+                            if (profileArrow) {
+                                profileArrow.classList.add("rotate-180");
+                            }
                         } else {
-                            dropdown.classList.add('hidden');
-                            if (profileArrow) profileArrow.classList.remove('rotate-180');
+                            dropdown.classList.add("hidden");
+                            if (profileArrow) {
+                                profileArrow.classList.remove("rotate-180");
+                            }
+                        }
+                    });
+
+                    document.addEventListener("click", (e) => {
+                        if (!newMenuToggle.contains(e.target)) {
+                            if (dropdown) dropdown.classList.add("hidden");
+                            if (profileArrow)
+                                profileArrow.classList.remove("rotate-180");
                         }
                     });
                 }
 
-                document.addEventListener('click', () => {
-                    if (dropdown) dropdown.classList.add('hidden');
-                    if (profileArrow) profileArrow.classList.remove('rotate-180');
+                document.addEventListener("click", () => {
+                    if (dropdown) dropdown.classList.add("hidden");
+                    if (profileArrow)
+                        profileArrow.classList.remove("rotate-180");
                 });
 
-                const logoutBtn = document.getElementById('logoutBtn');
+                const logoutBtn = document.getElementById("logoutBtn");
                 if (logoutBtn) {
-                    logoutBtn.addEventListener('click', () => {
-                        localStorage.setItem('selectedLanguage', 'en');
-                        signOut(auth).then(() => {
-                            window.location.reload();
-                        }).catch((error) => {
-                            console.error("Fehler beim Ausloggen:", error);
-                            window.location.reload();
-                        });
+                    logoutBtn.addEventListener("click", () => {
+                        localStorage.setItem("selectedLanguage", "en");
+                        signOut(auth)
+                            .then(() => {
+                                window.location.reload();
+                            })
+                            .catch((error) => {
+                                console.error("Fehler beim Ausloggen:", error);
+                                window.location.reload();
+                            });
                     });
                 }
-
             } else {
-                // --- USER IST AUSGELOGGT ---
-                // Hier muessen wir nur noch das Profil-Menue wieder zum Login-Button machen, falls es da war
-                const profileGroup = document.getElementById('userProfileGroup');
+                const profileGroup =
+                    document.getElementById("userProfileGroup");
                 if (profileGroup) {
                     profileGroup.outerHTML = `
                         <a data-key="nav.login" id="loginNavBtn" class="bg-white/40 hover:bg-white/60 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition" href="#">
@@ -227,28 +351,26 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 function updateVisibilityBasedOnAuth(user) {
-    const loggedInElements = document.querySelectorAll('.show-logged-in');
-    const loggedOutElements = document.querySelectorAll('.show-logged-out');
+    const loggedInElements = document.querySelectorAll(".show-logged-in");
+    const loggedOutElements = document.querySelectorAll(".show-logged-out");
 
     if (user) {
-        // Benutzer ist EINGELOGGT
-        loggedInElements.forEach(el => {
-            el.setAttribute('data-active', 'true');
-            el.style.removeProperty('display');
+        loggedInElements.forEach((el) => {
+            el.setAttribute("data-active", "true");
+            el.style.removeProperty("display");
         });
-        loggedOutElements.forEach(el => {
-            el.removeAttribute('data-active');
-            el.style.setProperty('display', 'none', 'important');
+        loggedOutElements.forEach((el) => {
+            el.removeAttribute("data-active");
+            el.style.setProperty("display", "none", "important");
         });
     } else {
-        // Benutzer ist AUSGELOGGT
-        loggedInElements.forEach(el => {
-            el.removeAttribute('data-active');
-            el.style.setProperty('display', 'none', 'important');
+        loggedInElements.forEach((el) => {
+            el.removeAttribute("data-active");
+            el.style.setProperty("display", "none", "important");
         });
-        loggedOutElements.forEach(el => {
-            el.setAttribute('data-active', 'true');
-            el.style.removeProperty('display');
+        loggedOutElements.forEach((el) => {
+            el.setAttribute("data-active", "true");
+            el.style.removeProperty("display");
         });
     }
 }
