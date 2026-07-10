@@ -4,6 +4,7 @@ import {
     setDoc,
     updateDoc,
     arrayUnion,
+    arrayRemove,
     getDoc,
     collection,
     query,
@@ -12,10 +13,47 @@ import {
     orderBy,
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+function generateTripId() {
+    const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let result = "";
+    for (let i = 0; i < 8; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
+}
+
+async function getStationFromCurrentLocation() {
+    return new Promise((resolve) => {
+        if (!navigator.geolocation) {
+            resolve("Zürich HB"); // Fallback
+            return;
+        }
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                const { latitude, longitude } = position.coords;
+                try {
+                    const url = `https://transport.opendata.ch/v1/locations?x=${latitude}&y=${longitude}&type=station`;
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    if (data.stations && data.stations.length > 0) {
+                        resolve(data.stations[0].name);
+                    } else {
+                        resolve("Zürich HB");
+                    }
+                } catch {
+                    resolve("Zürich HB");
+                }
+            },
+            () => resolve("Zürich HB"),
+        );
+    });
+}
+
 // 1. Neue Reise erstellen (Erweiterte Version)
 export async function createNewTrip(userId, title) {
-    const tripId = "TRIP-" + Math.floor(10000000 + Math.random() * 90000000);
+    const tripId = generateTripId();
     const tripRef = doc(db, "trips", tripId);
+    const startStation = await getStationFromCurrentLocation(); // Standort holen
 
     const initialData = {
         title: title,
@@ -25,7 +63,7 @@ export async function createNewTrip(userId, title) {
         isPublic: false,
         status: "active", // "active" oder "completed"
         gameState: {
-            currentStation: "Zürich HB",
+            currentStation: startStation,
             finalDestination: null,
             currentStep: "destination", // "destination", "connection", "stations"
             diceCount: 6,
@@ -62,11 +100,32 @@ export async function joinTrip(tripId, userId) {
     return true;
 }
 
-// 3. Eine aktive Reise beenden
-export async function endTrip(tripId) {
+export async function endTrip(tripId, userId) {
+    // <-- userId hier als Parameter übergeben
     const tripRef = doc(db, "trips", tripId);
+    const tripSnap = await getDoc(tripRef);
+
+    if (!tripSnap.exists()) {
+        throw new Error("Reise nicht gefunden!");
+    }
+
+    const tripData = tripSnap.data();
+    // Überprüfen, ob die aktuelle Person auch wirklich der Ersteller (hostId) ist
+    if (tripData.hostId !== userId) {
+        throw new Error("Nur der Ersteller kann diese Reise beenden!");
+    }
+
     await updateDoc(tripRef, {
         status: "completed",
+    });
+    return true;
+}
+
+// NEU: Funktion zum Verlassen einer Reise
+export async function leaveTrip(tripId, userId) {
+    const tripRef = doc(db, "trips", tripId);
+    await updateDoc(tripRef, {
+        members: arrayRemove(userId), // Entfernt die userId aus der Liste der Mitglieder
     });
     return true;
 }

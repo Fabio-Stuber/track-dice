@@ -139,9 +139,12 @@ function initAuthFormListeners() {
     }
 }
 
-document.addEventListener("modalsLoaded", () => {
+// Prüft, ob das Formular bereits da ist. Wenn ja, direkt aktivieren.
+if (document.getElementById("loginForm")) {
     initAuthFormListeners();
-});
+} else {
+    window.initAuthFormListeners = initAuthFormListeners;
+}
 
 function updateVisibilityBasedOnAuth(user) {
     const loggedInElements = document.querySelectorAll(".show-logged-in");

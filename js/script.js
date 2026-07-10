@@ -27,6 +27,24 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+import { initTripView, handleDeepLinking } from "./firebase/ui/trip-ui.js";
+import { auth } from "./firebase/firebase-init.js";
+
+// 2. Hier wird geprüft, ob der User eingeloggt ist
+auth.onAuthStateChanged(async (user) => {
+    if (user) {
+        // UI für den angemeldeten User laden
+        await initTripView(user.uid);
+
+        // --- HIER MUSS DER AUFRUF HIN ---
+        // Dies prüft beim Login, ob ein ?join=TRIPID Parameter in der URL steht
+        await handleDeepLinking(user.uid);
+        // --------------------------------
+    } else {
+        // User ist nicht eingeloggt
+    }
+});
+
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
         navigator.serviceWorker

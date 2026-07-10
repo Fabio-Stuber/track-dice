@@ -20,11 +20,51 @@ function setupModalToggles() {
 
             const auth = window.auth;
             const googleProvider = window.googleProvider;
+            const db = window.db; // Datenbank-Referenz holen
 
-            import("https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js")
-                .then(({ signInWithPopup }) => {
+            // Hier laden wir sowohl Auth als auch Firestore parallel
+            Promise.all([
+                import("https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"),
+                import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"),
+            ])
+                .then(([{ signInWithPopup }, { doc, getDoc, setDoc }]) => {
                     if (auth && googleProvider) {
-                        return signInWithPopup(auth, googleProvider);
+                        return signInWithPopup(auth, googleProvider).then(
+                            async (result) => {
+                                const user = result.user;
+
+                                if (db) {
+                                    const userRef = doc(db, "users", user.uid);
+                                    const userSnap = await getDoc(userRef);
+
+                                    // Wenn der Benutzer noch nicht in der Datenbank existiert, legen wir ihn an
+                                    if (!userSnap.exists()) {
+                                        // Den Namen versuchen in Vor- und Nachname aufzuteilen
+                                        const nameParts = (
+                                            user.displayName || ""
+                                        ).split(" ");
+                                        const firstName = nameParts[0] || "";
+                                        const lastName =
+                                            nameParts.slice(1).join(" ") || "";
+
+                                        await setDoc(userRef, {
+                                            firstName: firstName,
+                                            lastName: lastName,
+                                            displayName: user.displayName || "",
+                                            email: user.email || "",
+                                            role: "Member",
+                                            subscription: "Free",
+                                            // Hier nehmen wir das Google-Profilbild, falls vorhanden
+                                            avatarUrl:
+                                                user.photoURL ||
+                                                "https://www.w3schools.com/howto/img_avatar.png",
+                                            language: "en",
+                                            sbbTarif: "none",
+                                        });
+                                    }
+                                }
+                            },
+                        );
                     } else {
                         throw new Error("Firebase wurde noch nicht geladen.");
                     }
@@ -110,7 +150,7 @@ function loadAuthModals() {
             fetch("modals/login.html").then((r) => r.text()),
             fetch("modals/signup.html").then((r) => r.text()),
             fetch("modals/forgot.html").then((r) => r.text()),
-            fetch("modals/reset-password.html").then((r) => r.text()), //
+            fetch("modals/reset-password.html").then((r) => r.text()),
         ]).then(([loginHtml, signupHtml, forgotHtml, resetHtml]) => {
             loginContainer.innerHTML = loginHtml;
             signupContainer.innerHTML = signupHtml;
@@ -118,6 +158,11 @@ function loadAuthModals() {
             resetContainer.innerHTML = resetHtml;
 
             setupModalToggles();
+
+            // NEU: Aktiviert die Formular-Ueberwachung sofort nach dem Laden
+            if (typeof window.initAuthFormListeners === "function") {
+                window.initAuthFormListeners();
+            }
 
             languageSwitcher();
 

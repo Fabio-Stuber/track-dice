@@ -84,129 +84,277 @@
         </section>
     </main>
 
-    <main class="flex-grow max-w-7xl w-full mx-auto pt-8 pb-8 px-4 space-y-8 show-logged-in">
+    <main class="flex-grow max-w-2xl w-full mx-auto pt-8 pb-8 px-4 space-y-8 show-logged-in">
 
-        <section id="dashboard-view" class="space-y-8">
-            <div class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-6">
-                <h2 data-key="index.dashboard.title"
-                    class="text-2xl font-bold text-gray-900 dark:text-white uppercase tracking-wide">
+        <section class="text-center py-2">
+            <h1 data-key="index.title" class="text-4xl font-bold text-red-600 dark:text-white uppercase tracking-wide">
+                index.title
+            </h1>
+            <p data-key="index.subtitle" class="text-sm text-gray-950 dark:text-gray-400 mt-1">
+                index.subtitle
+            </p>
+        </section>
+
+        <div id="dashboard-view" class="space-y-8">
+            <section class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-6">
+                <h2 data-key="index.dashboard.title" class="text-2xl font-bold text-gray-900 dark:text-white uppercase">
                     index.dashboard.title
                 </h2>
 
-                <div class="flex flex-col sm:flex-row gap-4">
+                <div class="space-y-6">
                     <button id="btnCreateNewTrip"
                         class="w-full bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
                         <span data-key="index.dashboard.create_btn">index.dashboard.create_btn</span>
                     </button>
-                    <button id="btnJoinTrip"
-                        class="w-full bg-gray-600 hover:bg-gray-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
-                        <span data-key="index.dashboard.join_btn">index.dashboard.join_btn</span>
-                    </button>
-                </div>
-            </div>
 
-            <div class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-4">
-                <h3 data-key="index.dashboard.past_trips" class="text-xl font-bold text-gray-900 dark:text-white">
+                    <div class="relative flex items-center justify-center my-2">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-900 dark:border-gray-100"></div>
+                        </div>
+                        <span
+                            class="relative bg-white dark:bg-gray-800 px-3 text-xs text-gray-400 uppercase font-medium"
+                            data-key="index.dashboard.or">index.dashboard.or</span>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <input type="text" id="joinTripCode" placeholder="Enter Code (e.g. XXXXXX)"
+                            class="flex-grow px-5 py-2.5 rounded-sm border border-gray-900 dark:border-gray-100 bg-white dark:bg-gray-700 text-gray-900 dark:text-white font-mono text-center uppercase tracking-wider text-sm focus:outline-none focus:ring-1 focus:ring-gray-900 dark:focus:ring-gray-100" />
+                        <button id="btnJoinTrip"
+                            class="bg-gray-600 hover:bg-gray-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
+                            <span data-key="index.dashboard.join_btn">index.dashboard.join_btn</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-4">
+                <h3 data-key="index.dashboard.past_trips"
+                    class="text-sm font-bold text-gray-400 uppercase tracking-wider">
                     index.dashboard.past_trips
                 </h3>
-                <div id="past-trips-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <p class="text-sm text-gray-500 dark:text-gray-400 italic" data-key="index.dashboard.no_trips">
+                <div id="past-trips-list" class="space-y-2">
+                    <p class="text-sm text-gray-900 dark:text-white italic" data-key="index.dashboard.no_trips">
                         index.dashboard.no_trips
                     </p>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
 
-        <section id="active-trip-view" class="hidden max-w-2xl mx-auto space-y-6">
 
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 space-y-3">
-                <div class="flex justify-between items-center">
-                    <span class="bg-green-100 text-green-800 text-xs px-2.5 py-1 rounded-full font-bold uppercase"
-                        data-key="index.trip.active_status">
-                        index.trip.active_status
-                    </span>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">
-                        Code: <span id="trip-invite-code"
-                            class="font-mono font-bold text-red-600 dark:text-red-400">XXXXXX</span>
-                    </p>
+        <div id="active-trip-view" class="hidden space-y-8">
+
+            <section class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-4">
+                <div class="flex justify-between items-start gap-4">
+                    <div>
+                        <span
+                            class="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 text-xs px-2.5 py-1 rounded-sm font-bold uppercase tracking-wider"
+                            data-key="index.trip.active_status">
+                            index.trip.active_status
+                        </span>
+                        <h2 id="active-trip-title"
+                            class="text-2xl font-bold text-gray-900 dark:text-white mt-3 uppercase tracking-wide">
+                            Loading Trip Title...
+                        </h2>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase block tracking-wider">Code</span>
+                        <span id="trip-invite-code"
+                            class="font-mono font-bold text-xl text-red-600 dark:text-red-400 tracking-wider">XXXXXX</span>
+                    </div>
                 </div>
-                <h2 id="active-trip-title" class="text-2xl font-black text-gray-900 dark:text-white">
-                    Loading...
-                </h2>
-                <div class="flex gap-2">
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
                     <button id="btnShareTrip"
-                        class="flex-1 text-xs bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-white px-3 py-2 rounded transition"
-                        data-key="index.trip.share_btn">
-                        index.trip.share_btn
+                        class="flex items-center justify-center bg-gray-600 hover:bg-gray-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
+                        <span>Link teilen</span>
                     </button>
                     <button id="btnEndTrip"
-                        class="flex-1 text-xs bg-red-100 hover:bg-red-200 text-red-700 px-3 py-2 rounded transition"
-                        data-key="index.trip.end_btn">
-                        index.trip.end_btn
+                        class="hidden flex items-center justify-center bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
+                        <span>Reise beenden</span>
+                    </button>
+                    <button id="btnLeaveTrip"
+                        class="hidden flex items-center justify-center bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
+                        <span>Reise verlassen</span>
                     </button>
                 </div>
-            </div>
+            </section>
 
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2"
-                    data-key="index.trip.current_location">
-                    index.trip.current_location
-                </h3>
-                <div class="flex items-center space-x-2">
+            <section class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-4">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-gray-400"
+                        data-key="index.trip.location_label">
+                        index.trip.location_label
+                    </h3>
+                    <div id="lblStayTime"
+                        class="text-xs font-medium text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-sm">
+                        <span data-key="index.trip.stay_time">index.trip.stay_time</span>: <span id="valStayTime"
+                            class="font-bold text-red-600 dark:text-red-400">0</span> min
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3 py-1">
                     <span class="flex h-3 w-3 relative">
                         <span
-                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
                     </span>
-                    <h4 id="current-station-name" class="text-2xl font-black text-gray-900 dark:text-white">
-                        Zürich HB
+                    <h4 id="current-station-name"
+                        class="text-xl font-bold text-gray-900 dark:text-white uppercase tracking-wide">
+                        Detecting...
                     </h4>
                 </div>
-            </div>
+            </section>
 
-            <div id="step-1-destination"
-                class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border-l-4 border-red-600">
-                <span class="text-xs font-bold bg-red-100 text-red-700 px-2 py-0.5 rounded-full"
-                    data-key="index.steps.step1">index.steps.step1</span>
-                <h3 class="text-lg font-bold text-gray-900 dark:text-white mt-2" data-key="index.steps.dest_title">
-                    index.steps.dest_title</h3>
-                <p class="text-xs text-gray-500 dark:text-gray-400 mb-4" data-key="index.steps.dest_desc">
-                    index.steps.dest_desc</p>
-                <button id="btnRollDestination"
-                    class="w-full bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-4 py-2 rounded transition"
-                    data-key="index.steps.dest_btn">
-                    index.steps.dest_btn
-                </button>
-            </div>
+            <section class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-4">
+                <h3 class="text-sm font-bold uppercase tracking-wider text-gray-400" data-key="index.filter.title">
+                    index.filter.title
+                </h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-1">
+                    <label
+                        class="flex items-center space-x-3 text-sm font-medium text-gray-900 dark:text-white cursor-pointer">
+                        <input type="checkbox" id="filter-train" checked
+                            class="w-4 h-4 rounded-sm border-gray-900 dark:border-gray-100 text-red-600 focus:ring-red-500" />
+                        <span data-key="index.filter.train">index.filter.train</span>
+                    </label>
+                    <label
+                        class="flex items-center space-x-3 text-sm font-medium text-gray-900 dark:text-white cursor-pointer">
+                        <input type="checkbox" id="filter-bus" checked
+                            class="w-4 h-4 rounded-sm border-gray-300 text-red-600 focus:ring-red-500" />
+                        <span data-key="index.filter.bus">index.filter.bus</span>
+                    </label>
+                    <label
+                        class="flex items-center space-x-3 text-sm font-medium text-gray-900 dark:text-white tracking-tight cursor-pointer">
+                        <input type="checkbox" id="filter-ship" checked
+                            class="w-4 h-4 rounded-sm border-gray-300 text-red-600 focus:ring-red-500" />
+                        <span data-key="index.filter.ship">index.filter.ship</span>
+                    </label>
+                    <label
+                        class="flex items-center space-x-3 text-sm font-medium text-gray-900 dark:text-white cursor-pointer">
+                        <input type="checkbox" id="filter-cableway" checked
+                            class="w-4 h-4 rounded-sm border-gray-300 text-red-600 focus:ring-red-500" />
+                        <span data-key="index.filter.cableway">index.filter.cableway</span>
+                    </label>
+                    <label
+                        class="flex items-center space-x-3 text-sm font-medium text-gray-900 dark:text-white cursor-pointer">
+                        <input type="checkbox" id="filter-tram" checked
+                            class="w-4 h-4 rounded-sm border-gray-300 text-red-600 focus:ring-red-500" />
+                        <span data-key="index.filter.tram">index.filter.tram</span>
+                    </label>
+                </div>
+            </section>
 
-            <div id="step-2-connection"
-                class="hidden bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border-l-4 border-gray-400">
-                <span class="text-xs font-bold bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full"
-                    data-key="index.steps.step2">index.steps.step2</span>
-                <h3 class="text-lg font-bold text-gray-900 dark:text-white mt-2" data-key="index.steps.conn_title">
-                    index.steps.conn_title</h3>
-                <p class="text-xs text-gray-500 dark:text-gray-400 mb-4" data-key="index.steps.conn_desc">
-                    index.steps.conn_desc</p>
-                <div id="connection-details"
-                    class="p-4 bg-gray-50 dark:bg-gray-900 rounded text-sm text-gray-700 dark:text-gray-300"></div>
-            </div>
+            <section class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-6">
 
-            <div id="step-3-stations"
-                class="hidden bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border-l-4 border-blue-600">
-                <span class="text-xs font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full"
-                    data-key="index.steps.step3">index.steps.step3</span>
-                <h3 class="text-lg font-bold text-gray-900 dark:text-white mt-2" data-key="index.steps.stat_title">
-                    index.steps.stat_title</h3>
-                <p class="text-xs text-gray-500 dark:text-gray-400 mb-4" data-key="index.steps.stat_desc">
-                    index.steps.stat_desc</p>
-                <button id="btnRollStationCount"
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded transition"
-                    data-key="index.steps.stat_btn">
-                    index.steps.stat_btn
-                </button>
-            </div>
-        </section>
+                <div id="step-1-destination" class="space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <span
+                            class="bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider">Step
+                            1</span>
+                        <h3 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider"
+                            data-key="index.steps.dest_title">index.steps.dest_title</h3>
+                    </div>
+
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-sm p-4 max-h-60 overflow-y-auto space-y-1 border border-gray-200 dark:border-gray-600"
+                        id="container-possible-destinations">
+                        <p class="text-xs text-gray-400 italic">Loading live destinations...</p>
+                    </div>
+
+                    <div id="dest-dice-display-container"
+                        class="hidden flex flex-col items-center justify-center p-4 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-sm">
+                        <div id="dest-dice-wrapper" class="flex justify-center items-center space-x-2 py-2">
+                        </div>
+                    </div>
+
+                    <button id="btnRollDestination"
+                        class="w-full bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
+                        <span data-key="index.steps.dest_btn">index.steps.dest_btn</span>
+                    </button>
+
+                    <div id="destination-result"
+                        class="hidden bg-red-50 dark:bg-red-950/20 rounded-sm p-4 text-sm text-center font-bold text-red-600 dark:text-red-400">
+                        Selected Target: <span id="valRolledDestination">-</span>
+                    </div>
+
+                    <button id="btnConfirmStep1"
+                        class="hidden w-full bg-gray-600 hover:bg-gray-700 text-white rounded-sm px-5 py-2 text-xs font-medium transition cursor-pointer uppercase tracking-wider">
+                        Confirm Destination & Load Route
+                    </button>
+                </div>
+
+                <div id="step-2-connection" class="hidden border-t border-gray-200 dark:border-gray-700 pt-6 space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <span
+                            class="bg-gray-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider">Step
+                            2</span>
+                        <h3 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider"
+                            data-key="index.steps.conn_title">index.steps.conn_title</h3>
+                    </div>
+
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-sm p-4 text-xs font-mono text-gray-900 dark:text-white flex justify-between border border-gray-200 dark:border-gray-600"
+                        id="lblNextConnection">
+                        <span>Loading live SBB connection...</span>
+                    </div>
+
+                    <div class="space-y-2">
+                        <p class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Stops on this Route:</p>
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-sm p-4 max-h-44 overflow-y-auto space-y-2 border border-gray-200 dark:border-gray-600"
+                            id="container-intermediate-stops">
+                        </div>
+                    </div>
+
+                    <button id="btnConfirmStep2"
+                        class="w-full bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer uppercase tracking-wider">
+                        Confirm Route & Proceed to Dice
+                    </button>
+                </div>
+
+                <div id="step-3-stations" class="hidden border-t border-gray-200 dark:border-gray-700 pt-6 space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <span
+                            class="bg-gray-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider">Step
+                            3</span>
+                        <h3 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider"
+                            data-key="index.steps.stat_title">index.steps.stat_title</h3>
+                    </div>
+
+                    <div id="stations-dice-display-container"
+                        class="hidden flex flex-col items-center justify-center p-4 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-sm">
+                        <div id="stations-dice-wrapper" class="flex justify-center items-center space-x-2 py-2">
+                        </div>
+                    </div>
+
+                    <button id="btnRollStationCount"
+                        class="w-full bg-gray-600 hover:bg-gray-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
+                        <span data-key="index.steps.stat_btn">index.steps.stat_btn</span>
+                    </button>
+
+                    <div id="stations-result"
+                        class="hidden bg-gray-50 dark:bg-gray-700 rounded-sm p-4 text-sm text-center space-y-2 border border-gray-200 dark:border-gray-600">
+                        <div class="font-bold text-red-600 dark:text-red-400">
+                            You rolled: <span id="valRolledStops">0</span> Stops!
+                        </div>
+                        <div class="text-xs font-medium text-gray-900 dark:text-white">
+                            Your Exit Station: <span id="valNextExitStation"
+                                class="font-bold text-red-600 dark:text-red-400 uppercase tracking-wide">-</span>
+                        </div>
+                    </div>
+
+                    <button id="btnConfirmStep3"
+                        class="hidden w-full bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2 text-xs font-medium transition cursor-pointer uppercase tracking-wider">
+                        Confirm Stops & Open Arrival Panel
+                    </button>
+                </div>
+
+                <div id="step-4-confirm" class="hidden border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <button id="btnConfirmArrival"
+                        class="w-full bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-3 text-sm font-bold transition cursor-pointer uppercase tracking-wider">
+                        Confirm Arrival & Save Stop
+                    </button>
+                </div>
+
+            </section>
+        </div>
     </main>
+
 
     <!-- footer -->
     <footer id="footer"></footer>
@@ -227,7 +375,7 @@
     <script src="js/theme.js"></script>
     <script src="js/modals.js"></script>
     <script src="js/translation.js"></script>
-    <script src="js/script.js"></script>
+    <script type="module" src="js/script.js"></script>
     <script type="module" src="js/firebase/firebase-init.js"></script>
     <script type="module" src="js/firebase/ui/auth-ui.js"></script>
     <script type="module" src="js/firebase/ui/profile-ui.js"></script>

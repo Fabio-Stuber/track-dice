@@ -7,30 +7,32 @@ function getNestedValue(obj, path) {
 async function setLanguage(language) {
     try {
         const response = await fetch(`./language/${language}.json`);
-
-        if (!response.ok) {
-            throw new Error(`language for ${language} could not be loaded.`);
+        let translations = {};
+        
+        if (response.ok) {
+            translations = await response.json();
+        } else {
+            console.warn(`Language for ${language} could not be loaded. Using keys as fallback.`);
         }
-
-        const translations = await response.json();
 
         const elements = document.querySelectorAll("[data-key]");
         elements.forEach((element) => {
             const key = element.getAttribute("data-key");
             const translatedText = getNestedValue(translations, key);
 
-            if (translatedText !== null) {
-                const tagName = element.tagName.toLowerCase();
+            // Wenn die Übersetzung existiert, nehmen wir sie. 
+            // Ansonsten zeigen wir direkt den Schlüsselnamen an (perfekt zum Testen!).
+            const textToDisplay = translatedText !== null ? translatedText : key;
 
-                if (tagName === "img") {
-                    element.src = translatedText;
-                } else if (tagName === "meta") {
-                    element.setAttribute("content", translatedText);
-                } else if (tagName === "title") {
-                    document.title = translatedText;
-                } else {
-                    element.innerHTML = translatedText;
-                }
+            const tagName = element.tagName.toLowerCase();
+            if (tagName === "img") {
+                if (translatedText) element.src = translatedText;
+            } else if (tagName === "meta") {
+                element.setAttribute("content", textToDisplay);
+            } else if (tagName === "title") {
+                document.title = textToDisplay;
+            } else {
+                element.innerHTML = textToDisplay;
             }
         });
 
