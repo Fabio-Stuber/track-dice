@@ -20,9 +20,8 @@ function setupModalToggles() {
 
             const auth = window.auth;
             const googleProvider = window.googleProvider;
-            const db = window.db; // Datenbank-Referenz holen
+            const db = window.db;
 
-            // Hier laden wir sowohl Auth als auch Firestore parallel
             Promise.all([
                 import("https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"),
                 import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"),
@@ -37,9 +36,7 @@ function setupModalToggles() {
                                     const userRef = doc(db, "users", user.uid);
                                     const userSnap = await getDoc(userRef);
 
-                                    // Wenn der Benutzer noch nicht in der Datenbank existiert, legen wir ihn an
                                     if (!userSnap.exists()) {
-                                        // Den Namen versuchen in Vor- und Nachname aufzuteilen
                                         const nameParts = (
                                             user.displayName || ""
                                         ).split(" ");
@@ -54,7 +51,7 @@ function setupModalToggles() {
                                             email: user.email || "",
                                             role: "Member",
                                             subscription: "Free",
-                                            // Hier nehmen wir das Google-Profilbild, falls vorhanden
+
                                             avatarUrl:
                                                 user.photoURL ||
                                                 "https://www.w3schools.com/howto/img_avatar.png",
@@ -159,7 +156,6 @@ function loadAuthModals() {
 
             setupModalToggles();
 
-            // NEU: Aktiviert die Formular-Ueberwachung sofort nach dem Laden
             if (typeof window.initAuthFormListeners === "function") {
                 window.initAuthFormListeners();
             }

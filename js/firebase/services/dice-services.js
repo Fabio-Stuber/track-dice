@@ -1,16 +1,16 @@
-// Würfelt eine Zahl zwischen 1 und 6
+
 export function rollForStations() {
     return Math.floor(Math.random() * 6) + 1;
 }
 
-// Erwürfelt eine zufällige Aufenthaltszeit in Minuten
+
 export function rollForDuration() {
     const options = [10, 15, 20, 30, 45, 60];
     const randomIndex = Math.floor(Math.random() * options.length);
     return options[randomIndex];
 }
 
-// Holt alle möglichen Endziele (nächste 15 Abfahrten) von einer Station
+
 export async function fetchPossibleDestinations(currentStation) {
     try {
         const apiUrl = `https://transport.opendata.ch/v1/stationboard?station=${encodeURIComponent(currentStation)}&limit=15`;
@@ -22,7 +22,7 @@ export async function fetchPossibleDestinations(currentStation) {
             return ["Olten", "Bern", "Zürich HB"];
         }
 
-        // Filtern nach einzigartigen und gültigen Zielnamen
+        
         const destinations = data.stationboard
             .map((item) => item.to)
             .filter(
@@ -39,7 +39,7 @@ export async function fetchPossibleDestinations(currentStation) {
     }
 }
 
-// Holt die nächste echte Verbindung inklusive aller Zwischenhalte (passList)
+
 export async function fetchNextConnectionWithStops(fromStation, toStation) {
     try {
         const apiUrl = `https://transport.opendata.ch/v1/connections?from=${encodeURIComponent(fromStation)}&to=${encodeURIComponent(toStation)}&limit=1`;
@@ -59,7 +59,7 @@ export async function fetchNextConnectionWithStops(fromStation, toStation) {
             minute: "2-digit",
         });
 
-        // Zwischenhalte (passList) aus allen Abschnitten (Sections) sammeln
+        
         let stops = [];
         if (conn.sections) {
             conn.sections.forEach((section) => {
@@ -77,7 +77,7 @@ export async function fetchNextConnectionWithStops(fromStation, toStation) {
             });
         }
 
-        // Falls die passList leer ist, setzen wir Start und Ziel als Fallback
+        
         if (stops.length === 0) {
             stops = [fromStation, toStation];
         }

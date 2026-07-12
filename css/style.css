@@ -1,4 +1,4 @@
-/* Nur ausblenden, wenn das Attribut nicht auf 'true' steht */
+
 .show-logged-in:not([data-active="true"]) {
     display: none !important;
 }
@@ -11,6 +11,12 @@
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.copy {
+    -webkit-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
 }
 
 ::-webkit-scrollbar {
@@ -30,13 +36,12 @@
     background: #555;
 }
 
-/* Schiebt den Karten-Behälter in den Hintergrund */
+
 #map {
     z-index: 1 !important;
 }
 
-/* Falls Ihre Popups oder Modals überlagert werden, 
-   geben wir diesen einen höheren Wert */
+
 .fixed,
 .z-50 {
     z-index: 9999 !important;

@@ -15,7 +15,6 @@ import {
     onSnapshot,
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-// DOM Elemente holen
 const dashboardView = document.getElementById("dashboard-view");
 const activeTripView = document.getElementById("active-trip-view");
 const btnCreateNewTrip = document.getElementById("btnCreateNewTrip");
@@ -29,7 +28,6 @@ const currentStationName = document.getElementById("current-station-name");
 const valStayTime = document.getElementById("valStayTime");
 const tripInviteCode = document.getElementById("trip-invite-code");
 
-// Würfel-Elemente Steps
 const step1 = document.getElementById("step-1-destination");
 const step2 = document.getElementById("step-2-connection");
 const step3 = document.getElementById("step-3-stations");
@@ -57,7 +55,6 @@ const btnConfirmStep3 = document.getElementById("btnConfirmStep3");
 
 const btnConfirmArrival = document.getElementById("btnConfirmArrival");
 
-// Würfel SVGs Display Container
 const destDiceDisplay = document.getElementById("dest-dice-display-container");
 const destDiceWrapper = document.getElementById("dest-dice-wrapper");
 const stationsDiceDisplay = document.getElementById(
@@ -65,19 +62,27 @@ const stationsDiceDisplay = document.getElementById(
 );
 const stationsDiceWrapper = document.getElementById("stations-dice-wrapper");
 
-// Verkehrsmittel Checkboxen
 const filterTrain = document.getElementById("filter-train");
 const filterBus = document.getElementById("filter-bus");
 const filterShip = document.getElementById("filter-ship");
 const filterCableway = document.getElementById("filter-cableway");
 const filterTram = document.getElementById("filter-tram");
 
+const btnDice1 = document.getElementById("btnDice1");
+const btnDice2 = document.getElementById("btnDice2");
+const btnDice3 = document.getElementById("btnDice3");
+let destinationDiceCount = 1;
+
+const btnStopsDice1 = document.getElementById("btnStopsDice1");
+const btnStopsDice2 = document.getElementById("btnStopsDice2");
+const btnStopsDice3 = document.getElementById("btnStopsDice3");
+let stopsDiceCount = 1;
+
 let currentActiveTripId = null;
 let currentPossibleDestinationsList = [];
-let fetchedRouteStopsData = []; // Speichert Name, Breitengrad und Längengrad der Haltestellen
+let fetchedRouteStopsData = [];
 let unsubscribeTrip = null;
 
-// SBB Gleiswürfeln original Würfel-Grafik Generator
 function getDiceSvg(val) {
     const dots = {
         1: [[12, 12]],
@@ -194,27 +199,97 @@ function getTransportationParams() {
     return params.length > 0 ? params.join("&") : "transportations[]=train";
 }
 
+// Hilfsfunktion: Berechnet die Distanz zwischen zwei Koordinaten in Metern
+function getDistanceInMeters(lat1, lon1, lat2, lon2) {
+    if (!lat1 || !lon1 || !lat2 || !lon2) return 9999;
+    const R = 6371e3; // Erdradius in Metern
+    const rad = Math.PI / 180;
+    const dLat = (lat2 - lat1) * rad;
+    const dLon = (lon2 - lon1) * rad;
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * rad) *
+            Math.cos(lat2 * rad) *
+            Math.sin(dLon / 2) *
+            Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+}
+
 async function fetchFilteredDestinations(stationName) {
     try {
-        const filters = getTransportationParams();
-        const apiUrl = `https://transport.opendata.ch/v1/stationboard?station=${encodeURIComponent(stationName)}&limit=40&${filters}`;
-        const res = await fetch(apiUrl);
-        if (!res.ok) return ["Olten", "Bern", "Zürich HB", "Luzern"];
-        const data = await res.json();
-        if (!data.stationboard || data.stationboard.length === 0)
-            return ["Olten"];
-
-        return (
-            data.stationboard
-                .map((item) => item.to.trim())
-                .filter(
-                    (name, idx, self) =>
-                        name &&
-                        name !== stationName &&
-                        self.indexOf(name) === idx,
-                )
-                .slice(0, 6)
+        const locRes = await fetch(
+            `https://transport.opendata.ch/v1/locations?query=${encodeURIComponent(stationName)}`,
         );
+        const locData = await locRes.json();
+
+        let startLat = null;
+        let startLon = null;
+        let allDestinations = [];
+        const filters = getTransportationParams();
+
+        if (locData.stations && locData.stations.length > 0) {
+            startLat = locData.stations[0].coordinate.x;
+            startLon = locData.stations[0].coordinate.y;
+
+            const topStations = locData.stations.slice(0, 3);
+            for (const station of topStations) {
+                if (station.id) {
+                    // Lade mehr Verbindungen (50), da wir einige herausfiltern werden
+                    const apiUrl = `https://transport.opendata.ch/v1/stationboard?id=${station.id}&limit=50&${filters}`;
+                    const res = await fetch(apiUrl);
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (data.stationboard) {
+                            data.stationboard.forEach((item) => {
+                                if (!item.to) return;
+                                const destName = item.to.trim();
+                                if (destName === stationName) return;
+
+                                // 200m Filter prüfen: Wir schauen, wo der Bus/Zug hinfährt
+                                if (
+                                    startLat &&
+                                    startLon &&
+                                    item.passList &&
+                                    item.passList.length > 0
+                                ) {
+                                    const lastStop =
+                                        item.passList[item.passList.length - 1];
+                                    if (
+                                        lastStop.station &&
+                                        lastStop.station.coordinate
+                                    ) {
+                                        const destLat =
+                                            lastStop.station.coordinate.x;
+                                        const destLon =
+                                            lastStop.station.coordinate.y;
+                                        const dist = getDistanceInMeters(
+                                            startLat,
+                                            startLon,
+                                            destLat,
+                                            destLon,
+                                        );
+
+                                        // Wenn das Ziel weniger als 200m entfernt ist, ignorieren wir es
+                                        if (dist < 200) return;
+                                    }
+                                }
+                                allDestinations.push(destName);
+                            });
+                        }
+                    }
+                }
+            }
+        }
+
+        const uniqueDestinations = allDestinations.filter(
+            (name, idx, self) => self.indexOf(name) === idx,
+        );
+        if (uniqueDestinations.length === 0)
+            return ["Olten", "Bern", "Zürich HB"];
+
+        // Gib bis zu 18 Ziele zurück (3 Würfel = max 18)
+        return uniqueDestinations.slice(0, 18);
     } catch (e) {
         return ["Olten", "Bern", "Zürich HB"];
     }
@@ -269,14 +344,26 @@ async function fetchNextConnectionWithStops(fromStation, toStation) {
 }
 
 async function renderGameSteps(gameState) {
-    step1.classList.add("hidden");
-    step2.classList.add("hidden");
-    step3.classList.add("hidden");
-    step4.classList.add("hidden");
-    btnConfirmStep1.classList.add("hidden");
-    btnConfirmStep3.classList.add("hidden");
-
     const currentStep = gameState.currentStep;
+
+    // 1. Sichtbarkeit steuern: Alte Etappen bleiben offen!
+    step1.classList.remove("hidden");
+
+    if (["connection", "stations", "confirm"].includes(currentStep)) {
+        step2.classList.remove("hidden");
+    } else {
+        step2.classList.add("hidden");
+    }
+
+    if (currentStep === "confirm") {
+        step4.classList.remove("hidden");
+    } else {
+        step4.classList.add("hidden");
+    }
+
+    // 2. Manuelle Bestätigungs-Knöpfe komplett ausblenden
+    if (btnConfirmStep1) btnConfirmStep1.style.display = "none";
+    if (btnConfirmStep2) btnConfirmStep2.style.display = "none";
 
     if (currentStep === "destination") {
         step1.classList.remove("hidden");
@@ -330,6 +417,32 @@ async function renderGameSteps(gameState) {
                     "text-xs flex justify-between text-gray-900 dark:text-white border-b border-gray-100 dark:border-gray-700 py-1.5 px-2 transition-all rounded-sm";
                 item.innerHTML = `<span class="font-medium">${index}. ${stop.name}</span>`;
                 containerIntermediateStops.appendChild(item);
+                fetchedRouteStopsData.forEach((stop, index) => {
+                    const item = document.createElement("div");
+                    item.id = `stop-row-${index}`;
+                    item.className =
+                        "text-xs flex justify-between text-gray-900 dark:text-white border-b border-gray-100 dark:border-gray-700 py-1.5 px-2 transition-all rounded-sm";
+                    item.innerHTML = `<span class="font-medium">${index}. ${stop.name}</span>`;
+                    containerIntermediateStops.appendChild(item);
+                });
+
+                // --- NEU: Nach dem Laden 1.5 Sekunden warten, dann automatisch zu Etappe 3 ---
+                setTimeout(async () => {
+                    if (currentActiveTripId) {
+                        const tripRef = doc(db, "trips", currentActiveTripId);
+                        await updateDoc(tripRef, {
+                            "gameState.currentStep": "stations",
+                        });
+
+                        setTimeout(() => {
+                            if (step3)
+                                step3.scrollIntoView({
+                                    behavior: "smooth",
+                                    block: "start",
+                                });
+                        }, 400);
+                    }
+                }, 1500);
             });
         } else {
             lblNextConnection.innerHTML = `<span>No route found. Fallback loaded.</span>`;
@@ -352,7 +465,6 @@ async function renderGameSteps(gameState) {
         if (valNextExitStation)
             valNextExitStation.textContent = gameState.finalDestination || "-";
 
-        // Markiere die gewählte Station in der Routen-Liste (Schritt 2)
         const matchedIdx = fetchedRouteStopsData.findIndex(
             (s) => s.name === gameState.finalDestination,
         );
@@ -365,7 +477,6 @@ async function renderGameSteps(gameState) {
     }
 }
 
-// SBB Gleiswürfeln Shaker Simulation
 function triggerDiceAnimation(
     wrapperElement,
     displayContainer,
@@ -387,7 +498,47 @@ function triggerDiceAnimation(
     }, 100);
 }
 
-// Event-Listener: Schritt 1 - Destination würfeln
+// --- Würfel Anzahl Auswahl ---
+function updateDiceSelection(count) {
+    destinationDiceCount = count;
+    [btnDice1, btnDice2, btnDice3].forEach((btn, index) => {
+        if (!btn) return;
+        if (index + 1 === count) {
+            btn.className =
+                "bg-red-600 text-white rounded-sm px-3.5 py-1.5 text-sm font-medium transition cursor-pointer";
+        } else {
+            btn.className =
+                "bg-gray-600 hover:bg-gray-700 text-white rounded-sm px-3.5 py-1.5 text-sm font-medium transition cursor-pointer";
+        }
+    });
+}
+
+if (btnDice1) btnDice1.addEventListener("click", () => updateDiceSelection(1));
+if (btnDice2) btnDice2.addEventListener("click", () => updateDiceSelection(2));
+if (btnDice3) btnDice3.addEventListener("click", () => updateDiceSelection(3));
+
+function updateStopsDiceSelection(count) {
+    stopsDiceCount = count;
+    [btnStopsDice1, btnStopsDice2, btnStopsDice3].forEach((btn, index) => {
+        if (!btn) return;
+        if (index + 1 === count) {
+            btn.className =
+                "px-3 py-1 text-sm font-bold rounded-sm bg-red-600 text-white transition cursor-pointer";
+        } else {
+            btn.className =
+                "px-3 py-1 text-sm font-bold rounded-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition cursor-pointer";
+        }
+    });
+}
+
+if (btnStopsDice1)
+    btnStopsDice1.addEventListener("click", () => updateStopsDiceSelection(1));
+if (btnStopsDice2)
+    btnStopsDice2.addEventListener("click", () => updateStopsDiceSelection(2));
+if (btnStopsDice3)
+    btnStopsDice3.addEventListener("click", () => updateStopsDiceSelection(3));
+
+// --- Die eigentliche Würfel-Aktion ---
 if (btnRollDestination) {
     btnRollDestination.addEventListener("click", async () => {
         if (
@@ -397,26 +548,58 @@ if (btnRollDestination) {
             return;
         btnRollDestination.disabled = true;
 
-        const randomIndex = Math.floor(
-            Math.random() * currentPossibleDestinationsList.length,
-        );
-        const selectedTarget = currentPossibleDestinationsList[randomIndex];
-        const rolledNumber = randomIndex + 1;
+        let sum = 0;
+        let rollValues = [];
 
-        triggerDiceAnimation(
-            destDiceWrapper,
-            destDiceDisplay,
-            rolledNumber,
-            async () => {
+        // Würfelt für die ausgewählte Anzahl (1 bis 3)
+        for (let i = 0; i < destinationDiceCount; i++) {
+            const val = Math.floor(Math.random() * 6) + 1;
+            rollValues.push(val);
+            sum += val;
+        }
+
+        // Sicherstellen, dass die Zahl nicht über die Liste hinausgeht
+        const targetIndex = (sum - 1) % currentPossibleDestinationsList.length;
+        const selectedTarget = currentPossibleDestinationsList[targetIndex];
+
+        // Die Animation für mehrere Würfel
+        if (destDiceDisplay) destDiceDisplay.classList.remove("hidden");
+        let counter = 0;
+
+        const interval = setInterval(async () => {
+            destDiceWrapper.innerHTML = Array.from(
+                { length: destinationDiceCount },
+                () => Math.floor(Math.random() * 6) + 1,
+            )
+                .map(getDiceSvg)
+                .join("");
+            counter++;
+
+            if (counter > 12) {
+                clearInterval(interval);
+                // Endgültige Würfelaugen anzeigen
+                destDiceWrapper.innerHTML = rollValues.map(getDiceSvg).join("");
                 valRolledDestination.textContent = selectedTarget;
                 destinationResult.classList.remove("hidden");
+
                 const tripRef = doc(db, "trips", currentActiveTripId);
                 await updateDoc(tripRef, {
                     "gameState.finalDestination": selectedTarget,
+                    "gameState.currentStep": "connection", // <- NEU: Auto-Advance
                 });
+
+                // Sanft zum nächsten Schritt scrollen
+                setTimeout(() => {
+                    if (step2)
+                        step2.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",
+                        });
+                }, 400);
+
                 btnRollDestination.disabled = false;
-            },
-        );
+            }
+        }, 100);
     });
 }
 
@@ -436,39 +619,73 @@ if (btnConfirmStep2) {
     });
 }
 
-// Event-Listener: Schritt 3 - Stationenanzahl würfeln
 if (btnRollStationCount) {
     btnRollStationCount.addEventListener("click", async () => {
-        if (!currentActiveTripId) return;
+        if (!currentActiveTripId || fetchedRouteStopsData.length === 0) return;
         btnRollStationCount.disabled = true;
 
-        const rolledStops = rollForStations();
-        const exitIndex =
-            rolledStops < fetchedRouteStopsData.length
-                ? rolledStops
-                : fetchedRouteStopsData.length - 1;
-        const targetStopObj = fetchedRouteStopsData[exitIndex] || {
-            name: "Destination",
-            lat: null,
-            lon: null,
-        };
+        let sum = 0;
+        let rollValues = [];
 
-        triggerDiceAnimation(
-            stationsDiceWrapper,
-            stationsDiceDisplay,
-            rolledStops,
-            async () => {
+        // Entsprechende Anzahl Würfel werfen
+        for (let i = 0; i < stopsDiceCount; i++) {
+            const val = Math.floor(Math.random() * 6) + 1;
+            rollValues.push(val);
+            sum += val;
+        }
+
+        // Schauen, welcher Halt zur gewürfelten Zahl passt
+        const exitIndex =
+            sum < fetchedRouteStopsData.length
+                ? sum
+                : fetchedRouteStopsData.length - 1;
+        const targetStopObj =
+            fetchedRouteStopsData[exitIndex] ||
+            fetchedRouteStopsData[fetchedRouteStopsData.length - 1];
+
+        if (stationsDiceDisplay) stationsDiceDisplay.classList.remove("hidden");
+
+        let counter = 0;
+        const interval = setInterval(async () => {
+            stationsDiceWrapper.innerHTML = Array.from(
+                { length: stopsDiceCount },
+                () => Math.floor(Math.random() * 6) + 1,
+            )
+                .map(getDiceSvg)
+                .join("");
+            counter++;
+
+            if (counter > 12) {
+                clearInterval(interval);
+                stationsDiceWrapper.innerHTML = rollValues
+                    .map(getDiceSvg)
+                    .join("");
+
+                if (valRolledStops) valRolledStops.textContent = sum;
                 if (valNextExitStation)
                     valNextExitStation.textContent = targetStopObj.name;
+                stationsResult.classList.remove("hidden");
+
+                // In der Datenbank speichern und zum Abschluss wechseln
                 const tripRef = doc(db, "trips", currentActiveTripId);
                 await updateDoc(tripRef, {
-                    "gameState.rolledStations": rolledStops,
+                    "gameState.rolledStations": sum,
                     "gameState.finalDestination": targetStopObj.name,
                     "gameState.currentStep": "confirm",
                 });
+
+                // Sanft nach unten zum nächsten Schritt gleiten
+                setTimeout(() => {
+                    if (step4)
+                        step4.scrollIntoView({
+                            behavior: "smooth",
+                            block: "center",
+                        });
+                }, 400);
+
                 btnRollStationCount.disabled = false;
-            },
-        );
+            }
+        }, 100);
     });
 }
 
@@ -478,7 +695,6 @@ if (btnConfirmStep3) {
     });
 }
 
-// Event-Listener: Schritt 4 - Permanent loggen mit Startbahnhof & Koordinaten
 if (btnConfirmArrival) {
     btnConfirmArrival.addEventListener("click", async () => {
         if (!currentActiveTripId) return;
@@ -488,7 +704,6 @@ if (btnConfirmArrival) {
         const nextStation = valNextExitStation.textContent;
         const startStation = currentStationName.textContent;
 
-        // Finde die passenden Koordinaten aus unserer gespeicherten Liste heraus
         const matchedStop = fetchedRouteStopsData.find(
             (s) => s.name === nextStation,
         ) || { lat: null, lon: null };
@@ -499,7 +714,7 @@ if (btnConfirmArrival) {
             "gameState.currentStep": "destination",
             "gameState.finalDestination": null,
             "gameState.rolledStations": null,
-            // Permanent ins Reisetagebuch eintragen
+
             diary: arrayUnion({
                 startStation: startStation,
                 station: nextStation,
@@ -513,9 +728,6 @@ if (btnConfirmArrival) {
     });
 }
 
-// [Die verbleibenden Standard-Funktionen für Erstellen/Beitreten/Enden bleiben identisch...]
-
-// Event-Listener für Live-Filter-Wechsel (aktualisiert die Zielliste sofort)
 [filterTrain, filterBus, filterShip, filterCableway, filterTram].forEach(
     (checkbox) => {
         if (checkbox) {
@@ -538,7 +750,6 @@ if (btnConfirmArrival) {
     },
 );
 
-// Reise erstellen / Beenden / Beitreten
 if (btnCreateNewTrip) {
     btnCreateNewTrip.addEventListener("click", async () => {
         const user = auth.currentUser;
@@ -580,7 +791,6 @@ if (btnEndTrip) {
             return;
         try {
             if (currentActiveTripId) {
-                // Wir übergeben jetzt auch die user.uid zur Kontrolle
                 await endTrip(currentActiveTripId, user.uid);
                 initTripView(user.uid);
             }
@@ -590,7 +800,6 @@ if (btnEndTrip) {
     });
 }
 
-// NEU: Klick-Aktion für das Verlassen der Reise
 if (btnLeaveTrip) {
     btnLeaveTrip.addEventListener("click", async () => {
         const user = auth.currentUser;
@@ -599,7 +808,7 @@ if (btnLeaveTrip) {
         try {
             if (currentActiveTripId) {
                 await leaveTrip(currentActiveTripId, user.uid);
-                // Ansicht aktualisieren, damit man wieder das Dashboard sieht
+
                 initTripView(user.uid);
             }
         } catch (error) {
@@ -608,14 +817,11 @@ if (btnLeaveTrip) {
     });
 }
 
-// In trip-ui.js
 function generateShareLink(tripId) {
-    // Nimmt die aktuelle Domain und fügt den Parameter hinzu
     const baseUrl = window.location.origin;
     return `${baseUrl}/?join=${tripId}`;
 }
 
-// Beispiel für deinen Event-Listener am Share-Button
 if (btnShareTrip) {
     btnShareTrip.addEventListener("click", async () => {
         if (!currentActiveTripId) return;
@@ -627,12 +833,9 @@ if (btnShareTrip) {
         };
 
         try {
-            // Prüfen, ob der Browser die Web Share API unterstützt
             if (navigator.share) {
                 await navigator.share(shareData);
             } else {
-                // Fallback für Browser, die das nicht unterstützen
-                // Hier kopieren wir den Link als Alternative
                 const fullUrl = `${window.location.origin}/?join=${currentActiveTripId}`;
                 await navigator.clipboard.writeText(fullUrl);
                 alert(
@@ -649,7 +852,6 @@ export async function handleDeepLinking(userId) {
     const urlParams = new URLSearchParams(window.location.search);
     const tripIdToJoin = urlParams.get("join");
 
-    // Prüfen, ob wir bereits in diesem Trip sind oder ob gar kein Link vorhanden ist
     if (!tripIdToJoin || currentActiveTripId === tripIdToJoin) return;
 
     try {
@@ -663,4 +865,116 @@ export async function handleDeepLinking(userId) {
     } catch (error) {
         console.error("Beitreten über Link fehlgeschlagen:", error);
     }
+}
+
+const btnOpenSearchModal = document.getElementById("btnOpenSearchModal");
+const btnCloseSearchModal = document.getElementById("btnCloseSearchModal");
+const searchModal = document.getElementById("searchModal");
+const stationSearchInput = document.getElementById("stationSearchInput");
+const searchResults = document.getElementById("searchResults");
+
+// --- Manuelle Bahnhofssuche ---
+
+if (btnOpenSearchModal) {
+    btnOpenSearchModal.addEventListener("click", () => {
+        searchModal.classList.remove("hidden");
+        stationSearchInput.value = "";
+        searchResults.innerHTML =
+            '<p class="text-xs text-gray-400 italic p-3 text-center">Tippe den Namen eines Bahnhofs ein...</p>';
+        setTimeout(() => stationSearchInput.focus(), 100);
+    });
+}
+
+if (btnCloseSearchModal) {
+    btnCloseSearchModal.addEventListener("click", () => {
+        searchModal.classList.add("hidden");
+    });
+}
+
+// Schliesst das Fenster, wenn man daneben klickt
+if (searchModal) {
+    searchModal.addEventListener("click", (e) => {
+        if (e.target === searchModal) {
+            searchModal.classList.add("hidden");
+        }
+    });
+}
+
+let searchTimeout;
+if (stationSearchInput) {
+    stationSearchInput.addEventListener("input", (e) => {
+        clearTimeout(searchTimeout);
+        const query = e.target.value;
+
+        if (query.length < 2) {
+            searchResults.innerHTML =
+                '<p class="text-xs text-gray-400 italic p-3 text-center">Tippe den Namen eines Bahnhofs ein...</p>';
+            return;
+        }
+
+        // Kurze Wartezeit, damit nicht bei jedem Buchstaben sofort gesucht wird
+        searchTimeout = setTimeout(async () => {
+            searchResults.innerHTML =
+                '<p class="text-xs text-gray-400 italic p-3 text-center animate-pulse">Suche Bahnhöfe...</p>';
+            try {
+                const res = await fetch(
+                    `https://transport.opendata.ch/v1/locations?query=${encodeURIComponent(query)}&type=station`,
+                );
+                const data = await res.json();
+
+                if (data.stations && data.stations.length > 0) {
+                    // Nur gültige Haltestellen anzeigen
+                    const validStations = data.stations.filter((s) => s.id);
+
+                    if (validStations.length === 0) {
+                        searchResults.innerHTML =
+                            '<p class="text-xs text-gray-400 italic p-3 text-center">Keine passenden Stationen gefunden.</p>';
+                        return;
+                    }
+
+                    // Liste der Treffer aufbauen
+                    searchResults.innerHTML = validStations
+                        .map(
+                            (s) => `
+                        <button class="w-full text-left p-3 bg-gray-50 hover:bg-red-50 dark:bg-gray-700 dark:hover:bg-gray-600 transition text-sm font-medium text-gray-900 dark:text-white rounded-sm" data-station="${s.name}">
+                            ${s.name}
+                        </button>
+                    `,
+                        )
+                        .join("");
+
+                    // Klick auf einen Treffer verarbeiten
+                    searchResults.querySelectorAll("button").forEach((btn) => {
+                        btn.addEventListener("click", async (e) => {
+                            const selectedStation =
+                                e.currentTarget.getAttribute("data-station");
+                            searchModal.classList.add("hidden");
+
+                            // Station in die Firebase-Datenbank speichern
+                            if (currentActiveTripId) {
+                                const tripRef = doc(
+                                    db,
+                                    "trips",
+                                    currentActiveTripId,
+                                );
+                                await updateDoc(tripRef, {
+                                    "gameState.currentStation": selectedStation,
+                                    // Setzt die Route zurück, damit Etappe 1 neu startet
+                                    "gameState.currentStep": "destination",
+                                    "gameState.finalDestination": null,
+                                    "gameState.rolledStations": null,
+                                });
+                            }
+                        });
+                    });
+                } else {
+                    searchResults.innerHTML =
+                        '<p class="text-xs text-gray-400 italic p-3 text-center">Keine Stationen gefunden.</p>';
+                }
+            } catch (error) {
+                searchResults.innerHTML =
+                    '<p class="text-xs text-red-500 italic p-3 text-center">Fehler bei der Suche. Bitte prüfen Sie Ihre Verbindung.</p>';
+            }
+        }, 400); // 400 Millisekunden warten
+    });
 }

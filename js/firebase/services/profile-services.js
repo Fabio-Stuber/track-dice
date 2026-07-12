@@ -24,8 +24,6 @@ window.updateUserProfile = function (
         updateProfile(user, { displayName: displayName })
             .then(async () => {
                 if (db) {
-                    // setDoc und das { merge: true } sorgen dafür, dass das Dokument
-                    // erstellt wird, falls es fehlt, oder nur aktualisiert wird, falls es existiert.
                     const { doc, setDoc } =
                         await import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js");
                     const userDocRef = doc(db, "users", user.uid);
@@ -39,11 +37,11 @@ window.updateUserProfile = function (
                             avatarUrl: avatarUrl,
                             language: language,
                             sbbTarif: sbbTarif,
-                            role: "Member", // Fallback, falls neu erstellt
-                            subscription: "Free", // Fallback, falls neu erstellt
+                            role: "Member",
+                            subscription: "Free",
                         },
                         { merge: true },
-                    ); // <--- Das hier loest das Problem!
+                    );
                 }
 
                 if (newPassword && newPassword.trim() !== "") {

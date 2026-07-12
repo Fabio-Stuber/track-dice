@@ -30,18 +30,18 @@ document.addEventListener("DOMContentLoaded", () => {
 import { initTripView, handleDeepLinking } from "./firebase/ui/trip-ui.js";
 import { auth } from "./firebase/firebase-init.js";
 
-// 2. Hier wird geprüft, ob der User eingeloggt ist
+
 auth.onAuthStateChanged(async (user) => {
     if (user) {
-        // UI für den angemeldeten User laden
+        
         await initTripView(user.uid);
 
-        // --- HIER MUSS DER AUFRUF HIN ---
-        // Dies prüft beim Login, ob ein ?join=TRIPID Parameter in der URL steht
+        
+        
         await handleDeepLinking(user.uid);
-        // --------------------------------
+        
     } else {
-        // User ist nicht eingeloggt
+        
     }
 });
 
@@ -57,7 +57,7 @@ if ("serviceWorker" in navigator) {
 const fields = document.querySelectorAll(".code-field");
 const hiddenInput = document.getElementById("joinTripCode");
 
-// Hilfsfunktion: Aktualisiert das versteckte Feld für deine anderen Skripte
+
 function updateHiddenInput() {
     let fullCode = "";
     fields.forEach((field) => {
@@ -66,13 +66,13 @@ function updateHiddenInput() {
 
     hiddenInput.value = fullCode;
 
-    // Simuliert ein "Input"-Event, falls andere Skripte den Wert live überwachen
+    
     hiddenInput.dispatchEvent(new Event("input", { bubbles: true }));
     hiddenInput.dispatchEvent(new Event("change", { bubbles: true }));
 }
 
 fields.forEach((field, index) => {
-    // 1. Copy/Paste (Einfügen) abfangen
+    
     field.addEventListener("paste", (e) => {
         e.preventDefault();
         const pastedData = (e.clipboardData || window.clipboardData)
@@ -86,24 +86,40 @@ fields.forEach((field, index) => {
                 fields[index + i].focus();
             }
         }
-        updateHiddenInput(); // Wert aktualisieren
+        updateHiddenInput(); 
     });
 
-    // 2. Normale Eingabe per Tastatur
+    
     field.addEventListener("input", (e) => {
         field.value = field.value.toUpperCase();
 
         if (field.value.length === 1 && index < fields.length - 1) {
             fields[index + 1].focus();
         }
-        updateHiddenInput(); // Wert aktualisieren
+        updateHiddenInput(); 
     });
 
-    // 3. Zurück-Taste (Backspace)
+    
     field.addEventListener("keydown", (e) => {
         if (e.key === "Backspace" && field.value.length === 0 && index > 0) {
             fields[index - 1].focus();
-            updateHiddenInput(); // Wert aktualisieren
+            updateHiddenInput(); 
         }
+    });
+});
+
+
+document.getElementById('trip-invite-code').addEventListener('click', function() {
+    const textToCopy = this.innerText;
+    
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        const originalText = this.innerText;
+        this.innerText = 'Kopiert!';
+        
+        setTimeout(() => {
+            this.innerText = originalText;
+        }, 1500);
+    }).catch(err => {
+        console.error('Fehler beim Kopieren: ', err);
     });
 });

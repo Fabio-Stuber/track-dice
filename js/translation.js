@@ -22,8 +22,8 @@ async function setLanguage(language) {
             const key = element.getAttribute("data-key");
             const translatedText = getNestedValue(translations, key);
 
-            // Wenn die Übersetzung existiert, nehmen wir sie.
-            // Ansonsten zeigen wir direkt den Schlüsselnamen an (perfekt zum Testen!).
+            
+            
             const textToDisplay =
                 translatedText !== null ? translatedText : key;
 

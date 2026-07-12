@@ -6,7 +6,7 @@ import {
     speichereNeuesPasswort,
     logoutNutzer,
 } from "../services/auth-services.js";
-// WICHTIG: Der genaue Pfad zu deiner trip-ui.js im selben Ordner:
+
 import { initTripView } from "./trip-ui.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
@@ -139,7 +139,7 @@ function initAuthFormListeners() {
     }
 }
 
-// Prüft, ob das Formular bereits da ist. Wenn ja, direkt aktivieren.
+
 if (document.getElementById("loginForm")) {
     initAuthFormListeners();
 } else {
@@ -174,7 +174,7 @@ function updateVisibilityBasedOnAuth(user) {
 onAuthStateChanged(auth, async (user) => {
     updateVisibilityBasedOnAuth(user);
 
-    // HIER: Das lädt deine Reise-Ansichten, sobald der User eingeloggt ist!
+    
     if (user) {
         initTripView(user.uid);
     }
@@ -274,7 +274,7 @@ onAuthStateChanged(auth, async (user) => {
                             if (profileArrow)
                                 profileArrow.classList.add("rotate-180");
 
-                            // NEU: Schliesse das mobile Menü, wenn das User-Menü geöffnet wird
+                            
                             const mobileMenu =
                                 document.getElementById("mobileMenu");
                             if (
@@ -283,7 +283,7 @@ onAuthStateChanged(auth, async (user) => {
                             ) {
                                 mobileMenu.classList.add("hidden");
 
-                                // Setze die Icons im Burger-Button wieder zurück
+                                
                                 const mobileMenuToggle =
                                     document.getElementById("mobileMenuToggle");
                                 const burgerIcon =

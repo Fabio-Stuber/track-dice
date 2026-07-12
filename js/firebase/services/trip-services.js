@@ -41,7 +41,6 @@ async function getStationFromCurrentLocation() {
                         `https://transport.opendata.ch/v1/locations?x=${lat}&y=${lon}&type=station`,
                     );
                     const data = await response.json();
-                    // console.log(data);
 
                     if (data && data.stations && data.stations.length > 0) {
                         const station = data.stations.find(
@@ -57,17 +56,16 @@ async function getStationFromCurrentLocation() {
                 }
             },
             () => resolve("Zürich HB"),
-            // Aus deinem alten Code übernommen: Sorgt für genauere GPS-Daten
+
             { enableHighAccuracy: true, timeout: 8000 },
         );
     });
 }
 
-// 1. Neue Reise erstellen (Erweiterte Version)
 export async function createNewTrip(userId, title) {
     const tripId = generateTripId();
     const tripRef = doc(db, "trips", tripId);
-    const startStation = await getStationFromCurrentLocation(); // Standort holen
+    const startStation = await getStationFromCurrentLocation();
 
     const initialData = {
         title: title,
@@ -75,11 +73,11 @@ export async function createNewTrip(userId, title) {
         members: [userId],
         createdAt: new Date().toISOString(),
         isPublic: false,
-        status: "active", // "active" oder "completed"
+        status: "active",
         gameState: {
             currentStation: startStation,
             finalDestination: null,
-            currentStep: "destination", // "destination", "connection", "stations"
+            currentStep: "destination",
             diceCount: 6,
             joker: 2,
             currentConnection: null,
@@ -93,7 +91,6 @@ export async function createNewTrip(userId, title) {
     return tripId;
 }
 
-// 2. Mit einem Code einer Reise beitreten (Coop-Modus)
 export async function joinTrip(tripId, userId) {
     const tripRef = doc(db, "trips", tripId);
     const tripSnap = await getDoc(tripRef);
@@ -107,7 +104,6 @@ export async function joinTrip(tripId, userId) {
         throw new Error("This trip has already ended!");
     }
 
-    // Fügt die User-ID zu den Mitgliedern hinzu
     await updateDoc(tripRef, {
         members: arrayUnion(userId),
     });
@@ -115,7 +111,6 @@ export async function joinTrip(tripId, userId) {
 }
 
 export async function endTrip(tripId, userId) {
-    // <-- userId hier als Parameter übergeben
     const tripRef = doc(db, "trips", tripId);
     const tripSnap = await getDoc(tripRef);
 
@@ -124,7 +119,7 @@ export async function endTrip(tripId, userId) {
     }
 
     const tripData = tripSnap.data();
-    // Überprüfen, ob die aktuelle Person auch wirklich der Ersteller (hostId) ist
+
     if (tripData.hostId !== userId) {
         throw new Error("Nur der Ersteller kann diese Reise beenden!");
     }
@@ -135,19 +130,17 @@ export async function endTrip(tripId, userId) {
     return true;
 }
 
-// NEU: Funktion zum Verlassen einer Reise
 export async function leaveTrip(tripId, userId) {
     const tripRef = doc(db, "trips", tripId);
     await updateDoc(tripRef, {
-        members: arrayRemove(userId), // Entfernt die userId aus der Liste der Mitglieder
+        members: arrayRemove(userId),
     });
     return true;
 }
 
-// 4. Alle vergangenen Reisen eines Benutzers für das Profil laden
 export async function getUserPastTrips(userId) {
     const tripsRef = collection(db, "trips");
-    // Holt alle Reisen, bei denen der User Mitglied ist und die beendet sind
+
     const q = query(
         tripsRef,
         where("members", "array-contains", userId),
@@ -163,7 +156,6 @@ export async function getUserPastTrips(userId) {
     return trips;
 }
 
-// 5. Die aktuell aktive Reise eines Benutzers suchen
 export async function getActiveUserTrip(userId) {
     const tripsRef = collection(db, "trips");
     const q = query(
