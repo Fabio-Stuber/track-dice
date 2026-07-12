@@ -8,11 +8,13 @@ async function setLanguage(language) {
     try {
         const response = await fetch(`./language/${language}.json`);
         let translations = {};
-        
+
         if (response.ok) {
             translations = await response.json();
         } else {
-            console.warn(`Language for ${language} could not be loaded. Using keys as fallback.`);
+            console.warn(
+                `Language for ${language} could not be loaded. Using keys as fallback.`,
+            );
         }
 
         const elements = document.querySelectorAll("[data-key]");
@@ -20,9 +22,10 @@ async function setLanguage(language) {
             const key = element.getAttribute("data-key");
             const translatedText = getNestedValue(translations, key);
 
-            // Wenn die Übersetzung existiert, nehmen wir sie. 
+            // Wenn die Übersetzung existiert, nehmen wir sie.
             // Ansonsten zeigen wir direkt den Schlüsselnamen an (perfekt zum Testen!).
-            const textToDisplay = translatedText !== null ? translatedText : key;
+            const textToDisplay =
+                translatedText !== null ? translatedText : key;
 
             const tagName = element.tagName.toLowerCase();
             if (tagName === "img") {

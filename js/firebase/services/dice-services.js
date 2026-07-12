@@ -16,7 +16,7 @@ export async function fetchPossibleDestinations(currentStation) {
         const apiUrl = `https://transport.opendata.ch/v1/stationboard?station=${encodeURIComponent(currentStation)}&limit=15`;
         const response = await fetch(apiUrl);
         if (!response.ok) throw new Error("API error");
-        
+
         const data = await response.json();
         if (!data.stationboard || data.stationboard.length === 0) {
             return ["Olten", "Bern", "Zürich HB"];
@@ -25,7 +25,12 @@ export async function fetchPossibleDestinations(currentStation) {
         // Filtern nach einzigartigen und gültigen Zielnamen
         const destinations = data.stationboard
             .map((item) => item.to)
-            .filter((name, index, self) => name && name !== currentStation && self.indexOf(name) === index);
+            .filter(
+                (name, index, self) =>
+                    name &&
+                    name !== currentStation &&
+                    self.indexOf(name) === index,
+            );
 
         return destinations.length > 0 ? destinations : ["Olten", "Bern"];
     } catch (error) {
@@ -45,8 +50,14 @@ export async function fetchNextConnectionWithStops(fromStation, toStation) {
         if (!data.connections || data.connections.length === 0) return null;
 
         const conn = data.connections[0];
-        const departureTime = new Date(conn.from.departure).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-        const arrivalTime = new Date(conn.to.arrival).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+        const departureTime = new Date(conn.from.departure).toLocaleTimeString(
+            [],
+            { hour: "2-digit", minute: "2-digit" },
+        );
+        const arrivalTime = new Date(conn.to.arrival).toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+        });
 
         // Zwischenhalte (passList) aus allen Abschnitten (Sections) sammeln
         let stops = [];
@@ -54,7 +65,11 @@ export async function fetchNextConnectionWithStops(fromStation, toStation) {
             conn.sections.forEach((section) => {
                 if (section.journey && section.journey.passList) {
                     section.journey.passList.forEach((stop) => {
-                        if (stop.station && stop.station.name && !stops.includes(stop.station.name)) {
+                        if (
+                            stop.station &&
+                            stop.station.name &&
+                            !stops.includes(stop.station.name)
+                        ) {
                             stops.push(stop.station.name);
                         }
                     });
@@ -70,10 +85,12 @@ export async function fetchNextConnectionWithStops(fromStation, toStation) {
         return {
             departure: departureTime,
             arrival: arrivalTime,
-            line: conn.products ? conn.products[0] : (conn.from.platform || "Zug"),
+            line: conn.products
+                ? conn.products[0]
+                : conn.from.platform || "Zug",
             platform: conn.from.platform || "-",
             duration: conn.duration,
-            stops: stops
+            stops: stops,
         };
     } catch (error) {
         console.error("Error fetching connection paths:", error);

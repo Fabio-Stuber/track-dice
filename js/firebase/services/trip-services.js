@@ -25,18 +25,30 @@ function generateTripId() {
 async function getStationFromCurrentLocation() {
     return new Promise((resolve) => {
         if (!navigator.geolocation) {
-            resolve("Zürich HB"); // Fallback
+            showToast(
+                "Geolocation wird von deinem Browser nicht unterstützt.",
+                "error",
+            );
             return;
         }
+
         navigator.geolocation.getCurrentPosition(
             async (position) => {
-                const { latitude, longitude } = position.coords;
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
                 try {
-                    const url = `https://transport.opendata.ch/v1/locations?x=${latitude}&y=${longitude}&type=station`;
-                    const response = await fetch(url);
+                    const response = await fetch(
+                        `https://transport.opendata.ch/v1/locations?x=${lat}&y=${lon}&type=station`,
+                    );
                     const data = await response.json();
-                    if (data.stations && data.stations.length > 0) {
-                        resolve(data.stations[0].name);
+                    // console.log(data);
+
+                    if (data && data.stations && data.stations.length > 0) {
+                        const station = data.stations.find(
+                            (s) => s.id && !isNaN(s.id),
+                        );
+                        const cleanStationName = station.name;
+                        resolve(cleanStationName);
                     } else {
                         resolve("Zürich HB");
                     }
@@ -45,6 +57,8 @@ async function getStationFromCurrentLocation() {
                 }
             },
             () => resolve("Zürich HB"),
+            // Aus deinem alten Code übernommen: Sorgt für genauere GPS-Daten
+            { enableHighAccuracy: true, timeout: 8000 },
         );
     });
 }

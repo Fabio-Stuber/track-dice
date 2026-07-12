@@ -1,43 +1,77 @@
 <!doctype html>
-<html class="scroll-smooth no-copy" lang="en">
+<html class="scroll-smooth no-copy"
+      lang="en">
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
 
     <title data-key="index.meta.title">
         Roll the Track Dice - Your Random Train Adventure
     </title>
-    <meta name="index.meta.description" data-key="meta_description"
-        content="Experience a thrilling random adventure with the Track Dice!" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://app.gleiswuerfeln.ch/" />
-    <link rel="alternate" hreflang="de" href="https://app.gleiswuerfeln.ch/" />
-    <link rel="alternate" hreflang="en" href="https://app.gleiswuerfeln.ch/?lang=en" />
-    <link rel="alternate" hreflang="fr" href="https://app.gleiswuerfeln.ch/?lang=fr" />
-    <link rel="alternate" hreflang="it" href="https://app.gleiswuerfeln.ch/?lang=it" />
-    <link rel="alternate" hreflang="x-default" href="https://app.gleiswuerfeln.ch/?lang=en" />
+    <meta name="index.meta.description"
+          data-key="meta_description"
+          content="Experience a thrilling random adventure with the Track Dice!" />
+    <meta name="robots"
+          content="index, follow" />
+    <link rel="canonical"
+          href="https://app.gleiswuerfeln.ch/" />
+    <link rel="alternate"
+          hreflang="de"
+          href="https://app.gleiswuerfeln.ch/" />
+    <link rel="alternate"
+          hreflang="en"
+          href="https://app.gleiswuerfeln.ch/?lang=en" />
+    <link rel="alternate"
+          hreflang="fr"
+          href="https://app.gleiswuerfeln.ch/?lang=fr" />
+    <link rel="alternate"
+          hreflang="it"
+          href="https://app.gleiswuerfeln.ch/?lang=it" />
+    <link rel="alternate"
+          hreflang="x-default"
+          href="https://app.gleiswuerfeln.ch/?lang=en" />
 
-    <link rel="icon" type="image/svg+xml" href="img/logo-track-dice.svg" />
+    <link rel="icon"
+          type="image/svg+xml"
+          href="img/logo-track-dice.svg" />
 
-    <link rel="manifest" href="manifest.json" />
+    <link rel="manifest"
+          href="manifest.json" />
 
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="Track Dice" />
-    <link rel="apple-touch-icon" href="img/logo-512.png" />
+    <meta name="apple-mobile-web-app-capable"
+          content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="default" />
+    <meta name="apple-mobile-web-app-title"
+          content="Track Dice" />
+    <link rel="apple-touch-icon"
+          href="img/logo-512.png" />
 
-    <meta property="og:type" content="website" />
-    <meta property="og:title" data-key="index.meta.title" content="Roll the Track Dice - Your Random Train Adventure" />
-    <meta property="og:description" data-key="index.meta.description"
-        content="Experience a thrilling random adventure with the Track Dice!" />
-    <meta property="og:url" content="https://app.gleiswuerfeln.ch/" />
-    <meta property="og:image" content="https://app.gleiswuerfeln.ch/img/track-dice.jpg" />
-    <meta property="og:locale" data-key="meta_locale" content="de_CH" />
+    <meta property="og:type"
+          content="website" />
+    <meta property="og:title"
+          data-key="index.meta.title"
+          content="Roll the Track Dice - Your Random Train Adventure" />
+    <meta property="og:description"
+          data-key="index.meta.description"
+          content="Experience a thrilling random adventure with the Track Dice!" />
+    <meta property="og:url"
+          content="https://app.gleiswuerfeln.ch/" />
+    <meta property="og:image"
+          content="https://app.gleiswuerfeln.ch/img/track-dice.jpg" />
+    <meta property="og:locale"
+          data-key="meta_locale"
+          content="de_CH" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400..900&display=swap" rel="stylesheet" />
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com" />
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400..900&display=swap"
+          rel="stylesheet" />
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss">
@@ -46,7 +80,8 @@
                 --font-sans: "Maven Pro", sans-serif;
             }
         </style>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet"
+          href="css/style.css" />
 </head>
 
 <body class="font-sans flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -54,307 +89,366 @@
     <header id="header"></header>
     <!-- main content -->
 
-    <main class="grow show-logged-out">
-        <section class="no-copy relative min-h-[calc(100dvh-4rem)] flex items-center overflow-hidden">
+    <main class="show-logged-out">
+        <section class="relative min-h-[calc(100dvh-4rem)] flex items-center overflow-hidden">
             <div class="absolute inset-0 z-0">
-                <img id="hero-bg" src="img/track-dice.jpg" alt="Hintergrund"
-                    class="w-full h-full object-cover object-[85%_center] md:object-right opacity-50 dark:opacity-50" />
+                <img class="w-full h-full object-cover object-[85%_center] md:object-right opacity-50 dark:opacity-50"
+                     src="img/track-dice.jpg" />
             </div>
 
             <div class="relative z-10 p-8 mx-auto w-full max-w-7xl text-white">
-                <section
-                    class="shadow-md bg-white/50 dark:bg-gray-800/50 rounded-xl p-8 space-y-4 backdrop-blur-md max-w-xl">
+                <section class="shadow-md bg-white/50 dark:bg-gray-800/50 rounded-xl p-8 space-y-4 backdrop-blur-md max-w-xl">
                     <h1 data-key="index.show-logged-out.title"
                         class="text-4xl font-bold text-red-600 dark:text-white uppercase">
                         index.show-logged-out.title
                     </h1>
                     <p data-key="index.show-logged-out.description"
-                        class="text-sm text-gray-900 dark:text-white text-pretty text-justify">
+                       class="text-sm text-gray-900 dark:text-white text-pretty text-justify">
                         index.show-logged-out.description
                     </p>
 
                     <div class="flex flex-col sm:flex-row items-center gap-4 pt-4 w-full">
-                        <a data-key="index.show-logged-out.loginbtn" href="#" id="loginNavBtn"
-                            class="w-full text-center bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition">index.show-logged-out.loginbtn</a>
-                        <a data-key="index.show-logged-out.signupbtn" href="#" id="signupNavBtn"
-                            class="w-full text-center bg-gray-600 hover:bg-gray-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition">index.show-logged-out.signupbtn</a>
+                        <a data-key="index.show-logged-out.loginbtn"
+                           id="loginNavBtn"
+                           class="w-full text-center bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition"
+                           href="#">
+                            index.show-logged-out.loginbtn
+                        </a>
+                        <a data-key="index.show-logged-out.signupbtn"
+                           id="signupNavBtn"
+                           class="w-full text-center bg-gray-600 hover:bg-gray-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition"
+                           href="#">
+                            index.show-logged-out.signupbtn
+                        </a>
                     </div>
                 </section>
             </div>
         </section>
     </main>
 
-    <main class="flex-grow max-w-2xl w-full mx-auto pt-8 pb-8 px-4 space-y-8 show-logged-in">
+    <main class="grow max-w-7xl w-full mx-auto pt-8 pb-8 px-4 space-y-8 show-logged-in">
 
-        <section class="text-center py-2">
-            <h1 data-key="index.title" class="text-4xl font-bold text-red-600 dark:text-white uppercase tracking-wide">
-                index.title
+
+        <div id="dashboard-view"
+             class="space-y-8">
+            <h1 data-key="index.show-logged-in.title"
+                class="text-4xl font-bold text-red-600 dark:text-white uppercase">
+                index.show-logged-in.title
             </h1>
-            <p data-key="index.subtitle" class="text-sm text-gray-950 dark:text-gray-400 mt-1">
-                index.subtitle
-            </p>
-        </section>
-
-        <div id="dashboard-view" class="space-y-8">
-            <section class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-6">
-                <h2 data-key="index.dashboard.title" class="text-2xl font-bold text-gray-900 dark:text-white uppercase">
-                    index.dashboard.title
+            <section class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-4">
+                <h2 data-key="index.show-logged-in.dashboard.title"
+                    class="text-2xl font-bold text-gray-900 dark:text-white uppercase">
+                    index.show-logged-in.dashboard.title
                 </h2>
 
-                <div class="space-y-6">
-                    <button id="btnCreateNewTrip"
+                <button data-key="index.show-logged-in.dashboard.create_btn"
+                        id="btnCreateNewTrip"
                         class="w-full bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
-                        <span data-key="index.dashboard.create_btn">index.dashboard.create_btn</span>
+                    index.show-logged-in.dashboard.create_btn
+                </button>
+
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-300 dark:border-gray-600"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span data-key="index.show-logged-in.dashboard.or"
+                              class="px-2 bg-white dark:bg-gray-800 text-gray-500">index.show-logged-in.dashboard.or</span>
+                    </div>
+                </div>
+                <label data-key="index.show-logged-in.dashboard.entercode"
+                       class="block text-sm font-medium text-red-600 dark:text-white mb-1">index.show-logged-in.dashboard.entercode</label>
+                <div class="flex flex-col gap-4">
+                    <input type="hidden"
+                           id="joinTripCode"
+                           value="" />
+                    <div id="codeFieldsContainer"
+                         class="flex justify-between gap-2 mx-auto">
+                        <input type="text"
+                               maxlength="1"
+                               class="code-field text-center w-full py-2.5 rounded-sm border border-gray-900 dark:border-gray-100 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-gray-900 dark:focus:ring-gray-100" />
+                        <input type="text"
+                               maxlength="1"
+                               class="code-field text-center w-full py-2.5 rounded-sm border border-gray-900 dark:border-gray-100 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-gray-900 dark:focus:ring-gray-100" />
+                        <input type="text"
+                               maxlength="1"
+                               class="code-field text-center w-full py-2.5 rounded-sm border border-gray-900 dark:border-gray-100 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-gray-900 dark:focus:ring-gray-100" />
+                        <input type="text"
+                               maxlength="1"
+                               class="code-field text-center w-full py-2.5 rounded-sm border border-gray-900 dark:border-gray-100 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-gray-900 dark:focus:ring-gray-100" />
+                        <input type="text"
+                               maxlength="1"
+                               class="code-field text-center w-full py-2.5 rounded-sm border border-gray-900 dark:border-gray-100 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-gray-900 dark:focus:ring-gray-100" />
+                        <input type="text"
+                               maxlength="1"
+                               class="code-field text-center w-full py-2.5 rounded-sm border border-gray-900 dark:border-gray-100 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-gray-900 dark:focus:ring-gray-100" />
+                        <input type="text"
+                               maxlength="1"
+                               class="code-field text-center w-full py-2.5 rounded-sm border border-gray-900 dark:border-gray-100 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-gray-900 dark:focus:ring-gray-100" />
+                        <input type="text"
+                               maxlength="1"
+                               class="code-field text-center w-full py-2.5 rounded-sm border border-gray-900 dark:border-gray-100 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-gray-900 dark:focus:ring-gray-100" />
+                    </div>
+                    <button data-key="index.show-logged-in.dashboard.join_btn"
+                            id="btnJoinTrip"
+                            class="w-full bg-gray-600 hover:bg-gray-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
+                        index.show-logged-in.dashboard.join_btn
                     </button>
-
-                    <div class="relative flex items-center justify-center my-2">
-                        <div class="absolute inset-0 flex items-center">
-                            <div class="w-full border-t border-gray-900 dark:border-gray-100"></div>
-                        </div>
-                        <span
-                            class="relative bg-white dark:bg-gray-800 px-3 text-xs text-gray-400 uppercase font-medium"
-                            data-key="index.dashboard.or">index.dashboard.or</span>
-                    </div>
-
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <input type="text" id="joinTripCode" placeholder="Enter Code (e.g. XXXXXX)"
-                            class="flex-grow px-5 py-2.5 rounded-sm border border-gray-900 dark:border-gray-100 bg-white dark:bg-gray-700 text-gray-900 dark:text-white font-mono text-center uppercase tracking-wider text-sm focus:outline-none focus:ring-1 focus:ring-gray-900 dark:focus:ring-gray-100" />
-                        <button id="btnJoinTrip"
-                            class="bg-gray-600 hover:bg-gray-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
-                            <span data-key="index.dashboard.join_btn">index.dashboard.join_btn</span>
-                        </button>
-                    </div>
                 </div>
             </section>
 
             <section class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-4">
-                <h3 data-key="index.dashboard.past_trips"
-                    class="text-sm font-bold text-gray-400 uppercase tracking-wider">
-                    index.dashboard.past_trips
+                <h3 data-key="index.show-logged-in.dashboard.past_trips"
+                    class="text-2xl font-bold text-gray-900 dark:text-white uppercase">
+                    index.show-logged-in.dashboard.past_trips
                 </h3>
-                <div id="past-trips-list" class="space-y-2">
-                    <p class="text-sm text-gray-900 dark:text-white italic" data-key="index.dashboard.no_trips">
-                        index.dashboard.no_trips
+                <div id="past-trips-list"
+                     class="flex flex-col gap-4">
+                    <p data-key="index.show-logged-in.dashboard.no_trips"
+                       class="text-sm text-gray-900 dark:text-white italic">
+                        index.show-logged-in.dashboard.no_trips
                     </p>
+                    <button data-key="index.show-logged-in.dashboard.create_btn"
+                            id="btnCreateNewTrip"
+                            class="w-full bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
+                        index.show-logged-in.dashboard.create_btn
+                    </button>
                 </div>
             </section>
         </div>
 
-
-        <div id="active-trip-view" class="hidden space-y-8">
-
+        <div id="active-trip-view"
+             class="hidden space-y-8">
             <section class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-4">
-                <div class="flex justify-between items-start gap-4">
-                    <div>
-                        <span
-                            class="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 text-xs px-2.5 py-1 rounded-sm font-bold uppercase tracking-wider"
-                            data-key="index.trip.active_status">
-                            index.trip.active_status
-                        </span>
-                        <h2 id="active-trip-title"
-                            class="text-2xl font-bold text-gray-900 dark:text-white mt-3 uppercase tracking-wide">
-                            Loading Trip Title...
-                        </h2>
+
+                <h2 id="active-trip-title"
+                    class="text-2xl font-bold text-gray-900 dark:text-white uppercase">
+                </h2>
+
+                <div class="flex justify-between items-center gap-4">
+                    <div class="hidden item-left flex items-center space-x-2 mt-1">
+                        <span class="text-md text-gray-900 dark:text-white text-pretty text-justify"
+                              data-key="index.show-logged-in.trip.coop_label">index.show-logged-in.trip.coop_label</span>
+                        <div class="flex -space-x-1.5">
+                            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-gray-800"
+                                 src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?w=100&h=100&fit=crop"
+                                 title="User">
+                            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-gray-800"
+                                 src="https://images.unsplash.com/photo-1550525811-e5869dd03032?w=100&h=100&fit=crop"
+                                 title="User">
+                            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-gray-800"
+                                 src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop"
+                                 title="User">
+                        </div>
                     </div>
-                    <div class="text-right">
-                        <span class="text-[10px] font-bold text-gray-400 uppercase block tracking-wider">Code</span>
+                    <p class="item-right text-md text-gray-900 dark:text-white text-pretty text-justify">
+                        <span data-key="index.show-logged-in.trip.code">index.show-logged-in.trip.code</span>
                         <span id="trip-invite-code"
-                            class="font-mono font-bold text-xl text-red-600 dark:text-red-400 tracking-wider">XXXXXX</span>
-                    </div>
+                              class="font-mono font-bold text-red-600">XXXXXXXX</span>
+                    </p>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                    <button id="btnShareTrip"
-                        class="flex items-center justify-center bg-gray-600 hover:bg-gray-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
-                        <span>Link teilen</span>
+                <div class="flex flex-col sm:flex-row items-center gap-4 w-full">
+                    <button data-key="index.show-logged-in.trip.btnEndTrip"
+                            id="btnEndTrip"
+                            class="hidden w-full bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
+                        index.show-logged-in.trip.btnEndTrip
                     </button>
-                    <button id="btnEndTrip"
-                        class="hidden flex items-center justify-center bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
-                        <span>Reise beenden</span>
+                    <button data-key="index.show-logged-in.trip.btnLeaveTrip"
+                            id="btnLeaveTrip"
+                            class="hidden w-full bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
+                        index.show-logged-in.trip.btnLeaveTrip
                     </button>
-                    <button id="btnLeaveTrip"
-                        class="hidden flex items-center justify-center bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
-                        <span>Reise verlassen</span>
+                    <button data-key="index.show-logged-in.trip.btnShareTrip"
+                            id="btnShareTrip"
+                            class="w-full bg-gray-600 hover:bg-gray-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
+                        index.show-logged-in.trip.btnShareTrip
                     </button>
                 </div>
+
             </section>
 
             <section class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-4">
-                <div class="flex justify-between items-center">
-                    <h3 class="text-sm font-bold uppercase tracking-wider text-gray-400"
-                        data-key="index.trip.location_label">
-                        index.trip.location_label
-                    </h3>
-                    <div id="lblStayTime"
-                        class="text-xs font-medium text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-sm">
-                        <span data-key="index.trip.stay_time">index.trip.stay_time</span>: <span id="valStayTime"
-                            class="font-bold text-red-600 dark:text-red-400">0</span> min
-                    </div>
-                </div>
-                <div class="flex items-center space-x-3 py-1">
-                    <span class="flex h-3 w-3 relative">
-                        <span
-                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
-                    </span>
-                    <h4 id="current-station-name"
-                        class="text-xl font-bold text-gray-900 dark:text-white uppercase tracking-wide">
-                        Detecting...
-                    </h4>
-                </div>
-            </section>
 
-            <section class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-4">
-                <h3 class="text-sm font-bold uppercase tracking-wider text-gray-400" data-key="index.filter.title">
-                    index.filter.title
+                <h3 data-key="index.show-logged-in.trip.location_label"
+                    class="text-sm font-bold text-gray-400 uppercase">
+                    index.show-logged-in.trip.location_label
                 </h3>
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-1">
-                    <label
-                        class="flex items-center space-x-3 text-sm font-medium text-gray-900 dark:text-white cursor-pointer">
-                        <input type="checkbox" id="filter-train" checked
-                            class="w-4 h-4 rounded-sm border-gray-900 dark:border-gray-100 text-red-600 focus:ring-red-500" />
-                        <span data-key="index.filter.train">index.filter.train</span>
-                    </label>
-                    <label
-                        class="flex items-center space-x-3 text-sm font-medium text-gray-900 dark:text-white cursor-pointer">
-                        <input type="checkbox" id="filter-bus" checked
-                            class="w-4 h-4 rounded-sm border-gray-300 text-red-600 focus:ring-red-500" />
-                        <span data-key="index.filter.bus">index.filter.bus</span>
-                    </label>
-                    <label
-                        class="flex items-center space-x-3 text-sm font-medium text-gray-900 dark:text-white tracking-tight cursor-pointer">
-                        <input type="checkbox" id="filter-ship" checked
-                            class="w-4 h-4 rounded-sm border-gray-300 text-red-600 focus:ring-red-500" />
-                        <span data-key="index.filter.ship">index.filter.ship</span>
-                    </label>
-                    <label
-                        class="flex items-center space-x-3 text-sm font-medium text-gray-900 dark:text-white cursor-pointer">
-                        <input type="checkbox" id="filter-cableway" checked
-                            class="w-4 h-4 rounded-sm border-gray-300 text-red-600 focus:ring-red-500" />
-                        <span data-key="index.filter.cableway">index.filter.cableway</span>
-                    </label>
-                    <label
-                        class="flex items-center space-x-3 text-sm font-medium text-gray-900 dark:text-white cursor-pointer">
-                        <input type="checkbox" id="filter-tram" checked
-                            class="w-4 h-4 rounded-sm border-gray-300 text-red-600 focus:ring-red-500" />
-                        <span data-key="index.filter.tram">index.filter.tram</span>
-                    </label>
-                </div>
+
+                <p id="current-station-name"
+                   class="text-2xl font-bold text-gray-900 dark:text-white uppercase">
+                    Detecting...
+                </p>
+
             </section>
 
-            <section class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-6">
+            <section class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-4">
 
-                <div id="step-1-destination" class="space-y-4">
-                    <div class="flex items-center space-x-2">
-                        <span
-                            class="bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider">Step
-                            1</span>
-                        <h3 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider"
-                            data-key="index.steps.dest_title">index.steps.dest_title</h3>
-                    </div>
+                <h3 data-key="index.show-logged-in.trip.filter_label"
+                    class="text-sm font-bold text-gray-400 uppercase">
+                    index.show-logged-in.trip.filter_label
+                </h3>
 
-                    <div class="bg-gray-50 dark:bg-gray-700 rounded-sm p-4 max-h-60 overflow-y-auto space-y-1 border border-gray-200 dark:border-gray-600"
-                        id="container-possible-destinations">
-                        <p class="text-xs text-gray-400 italic">Loading live destinations...</p>
-                    </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    <label class="flex items-center space-x-2 text-sm font-medium text-gray-900 dark:text-white cursor-pointer">
+                        <input id="filter-train"
+                               class="w-4 h-4 rounded-sm border-gray-300 text-red-600 focus:ring-red-500"
+                               type="checkbox"
+                               checked />
+                        <span data-key="index.show-logged-in.trip.filter_train">index.show-logged-in.trip.filter_train</span>
+                    </label>
+                    <label class="flex items-center space-x-2 text-sm font-medium text-gray-900 dark:text-white cursor-pointer">
+                        <input id="filter-bus"
+                               class="w-4 h-4 rounded-sm border-gray-300 text-red-600 focus:ring-red-500"
+                               type="checkbox"
+                               checked />
+                        <span data-key="index.show-logged-in.trip.filter_bus">index.show-logged-in.trip.filter_bus</span>
+                    </label>
+                    <label class="flex items-center space-x-2 text-sm font-medium text-gray-900 dark:text-white tracking-tight cursor-pointer">
+                        <input id="filter-ship"
+                               class="w-4 h-4 rounded-sm border-gray-300 text-red-600 focus:ring-red-500"
+                               type="checkbox"
+                               checked />
+                        <span data-key="index.show-logged-in.trip.filter_ship">index.show-logged-in.trip.filter_ship</span>
+                    </label>
+                    <label class="flex items-center space-x-2 text-sm font-medium text-gray-900 dark:text-white cursor-pointer">
+                        <input id="filter-cableway"
+                               class="w-4 h-4 rounded-sm border-gray-300 text-red-600 focus:ring-red-500"
+                               type="checkbox"
+                               checked />
+                        <span data-key="index.show-logged-in.trip.filter_cableway">index.show-logged-in.trip.filter_cableway</span>
+                    </label>
+                    <label class="flex items-center space-x-2 text-sm font-medium text-gray-900 dark:text-white cursor-pointer">
+                        <input id="filter-tram"
+                               class="w-4 h-4 rounded-sm border-gray-300 text-red-600 focus:ring-red-500"
+                               type="checkbox"
+                               checked />
+                        <span data-key="index.show-logged-in.trip.filter_tram">index.show-logged-in.trip.filter_tram</span>
+                    </label>
+                </div>
 
-                    <div id="dest-dice-display-container"
-                        class="hidden flex flex-col items-center justify-center p-4 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-sm">
-                        <div id="dest-dice-wrapper" class="flex justify-center items-center space-x-2 py-2">
-                        </div>
-                    </div>
+            </section>
 
-                    <button id="btnRollDestination"
+            <section id="step-1-destination"
+                     class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-4">
+
+                <h3 class="text-sm font-bold text-gray-900 dark:text-white uppercase">
+                    <span data-key="index.show-logged-in.trip.step_1_label"
+                          class="bg-red-600 text-white font-bold px-2 py-1 rounded-sm mr-2">index.show-logged-in.trip.step_1_label</span>
+                    <span data-key="index.show-logged-in.trip.step_1_title"></span>
+                </h3>
+
+                <div id="container-possible-destinations"
+                     class="w-full p-2.5 rounded-sm border border-gray-900 dark:border-gray-100 bg-white dark:bg-gray-700 text-gray-900 dark:text-white max-h-60 overflow-y-auto space-y-1">
+                </div>
+
+                <div id="dest-dice-display-container"
+                     class="hidden flex flex-col items-center justify-center p-2.5 rounded-sm border border-gray-900 dark:border-gray-100 bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                    <div id="dest-dice-wrapper"
+                         class="flex justify-center items-center space-x-2 py-2"></div>
+                </div>
+
+                <button id="btnRollDestination"
                         class="w-full bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
-                        <span data-key="index.steps.dest_btn">index.steps.dest_btn</span>
-                    </button>
+                    <span data-key="index.steps.dest_btn">index.steps.dest_btn</span>
+                </button>
 
-                    <div id="destination-result"
-                        class="hidden bg-red-50 dark:bg-red-950/20 rounded-sm p-4 text-sm text-center font-bold text-red-600 dark:text-red-400">
-                        Selected Target: <span id="valRolledDestination">-</span>
-                    </div>
+                <div id="destination-result"
+                     class="hidden p-5 text-center rounded-sm border border-gray-900 dark:border-gray-100 bg-white dark:bg-gray-700 text-gray-900 dark:text-white max-h-60 overflow-y-auto space-y-1">
+                    <span id="valRolledDestination"></span>
+                </div>
 
-                    <button id="btnConfirmStep1"
+                <button id="btnConfirmStep1"
                         class="hidden w-full bg-gray-600 hover:bg-gray-700 text-white rounded-sm px-5 py-2 text-xs font-medium transition cursor-pointer uppercase tracking-wider">
-                        Confirm Destination & Load Route
-                    </button>
+                    Confirm Destination & Load Route
+                </button>
+            </section>
+
+            <section id="step-2-connection"
+                     class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-4">
+                <div class="flex items-center space-x-2">
+                    <span class="bg-gray-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider">Step
+                        2</span>
+                    <h3 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider"
+                        data-key="index.steps.conn_title">
+                        index.steps.conn_title
+                    </h3>
                 </div>
 
-                <div id="step-2-connection" class="hidden border-t border-gray-200 dark:border-gray-700 pt-6 space-y-4">
-                    <div class="flex items-center space-x-2">
-                        <span
-                            class="bg-gray-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider">Step
-                            2</span>
-                        <h3 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider"
-                            data-key="index.steps.conn_title">index.steps.conn_title</h3>
-                    </div>
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-sm p-4 text-xs font-mono text-gray-900 dark:text-white flex justify-between border border-gray-200 dark:border-gray-600"
+                     id="lblNextConnection">
+                    <span>Loading live SBB connection...</span>
+                </div>
 
-                    <div class="bg-gray-50 dark:bg-gray-700 rounded-sm p-4 text-xs font-mono text-gray-900 dark:text-white flex justify-between border border-gray-200 dark:border-gray-600"
-                        id="lblNextConnection">
-                        <span>Loading live SBB connection...</span>
-                    </div>
+                <div class="space-y-2">
+                    <p class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">
+                        Stops on this Route:
+                    </p>
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-sm p-4 max-h-44 overflow-y-auto space-y-2 border border-gray-200 dark:border-gray-600"
+                         id="container-intermediate-stops"></div>
+                </div>
 
-                    <div class="space-y-2">
-                        <p class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Stops on this Route:</p>
-                        <div class="bg-gray-50 dark:bg-gray-700 rounded-sm p-4 max-h-44 overflow-y-auto space-y-2 border border-gray-200 dark:border-gray-600"
-                            id="container-intermediate-stops">
-                        </div>
-                    </div>
-
-                    <button id="btnConfirmStep2"
+                <button id="btnConfirmStep2"
                         class="w-full bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer uppercase tracking-wider">
-                        Confirm Route & Proceed to Dice
-                    </button>
+                    Confirm Route & Proceed to Dice
+                </button>
+
+            </section>
+
+            <section id="step-3-stations"
+                     class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-4">
+
+                <div class="flex items-center space-x-2">
+                    <span class="bg-gray-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider">Step
+                        3</span>
+                    <h3 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider"
+                        data-key="index.steps.stat_title">
+                        index.steps.stat_title
+                    </h3>
                 </div>
 
-                <div id="step-3-stations" class="hidden border-t border-gray-200 dark:border-gray-700 pt-6 space-y-4">
-                    <div class="flex items-center space-x-2">
-                        <span
-                            class="bg-gray-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider">Step
-                            3</span>
-                        <h3 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider"
-                            data-key="index.steps.stat_title">index.steps.stat_title</h3>
-                    </div>
+                <div id="stations-dice-display-container"
+                     class="hidden flex flex-col items-center justify-center p-4 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-sm">
+                    <div id="stations-dice-wrapper"
+                         class="flex justify-center items-center space-x-2 py-2"></div>
+                </div>
 
-                    <div id="stations-dice-display-container"
-                        class="hidden flex flex-col items-center justify-center p-4 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-sm">
-                        <div id="stations-dice-wrapper" class="flex justify-center items-center space-x-2 py-2">
-                        </div>
-                    </div>
-
-                    <button id="btnRollStationCount"
+                <button id="btnRollStationCount"
                         class="w-full bg-gray-600 hover:bg-gray-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
-                        <span data-key="index.steps.stat_btn">index.steps.stat_btn</span>
-                    </button>
+                    <span data-key="index.steps.stat_btn">index.steps.stat_btn</span>
+                </button>
 
-                    <div id="stations-result"
-                        class="hidden bg-gray-50 dark:bg-gray-700 rounded-sm p-4 text-sm text-center space-y-2 border border-gray-200 dark:border-gray-600">
-                        <div class="font-bold text-red-600 dark:text-red-400">
-                            You rolled: <span id="valRolledStops">0</span> Stops!
-                        </div>
-                        <div class="text-xs font-medium text-gray-900 dark:text-white">
-                            Your Exit Station: <span id="valNextExitStation"
-                                class="font-bold text-red-600 dark:text-red-400 uppercase tracking-wide">-</span>
-                        </div>
+                <div id="stations-result"
+                     class="hidden bg-gray-50 dark:bg-gray-700 rounded-sm p-4 text-sm text-center space-y-2 border border-gray-200 dark:border-gray-600">
+                    <div class="font-bold text-red-600 dark:text-red-400">
+                        You rolled:
+                        <span id="valRolledStops">0</span> Stops!
                     </div>
+                    <div class="text-xs font-medium text-gray-900 dark:text-white">
+                        Your Exit Station:
+                        <span id="valNextExitStation"
+                              class="font-bold text-red-600 dark:text-red-400 uppercase tracking-wide">-</span>
+                    </div>
+                </div>
 
-                    <button id="btnConfirmStep3"
+                <button id="btnConfirmStep3"
                         class="hidden w-full bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2 text-xs font-medium transition cursor-pointer uppercase tracking-wider">
-                        Confirm Stops & Open Arrival Panel
-                    </button>
-                </div>
+                    Confirm Stops & Open Arrival Panel
+                </button>
 
-                <div id="step-4-confirm" class="hidden border-t border-gray-200 dark:border-gray-700 pt-6">
-                    <button id="btnConfirmArrival"
+            </section>
+
+            <section id="step-4-confirm"
+                     class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-4">
+
+                <button id="btnConfirmArrival"
                         class="w-full bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-3 text-sm font-bold transition cursor-pointer uppercase tracking-wider">
-                        Confirm Arrival & Save Stop
-                    </button>
-                </div>
+                    Confirm Arrival & Save Stop
+                </button>
 
             </section>
         </div>
     </main>
-
 
     <!-- footer -->
     <footer id="footer"></footer>
@@ -375,10 +469,14 @@
     <script src="js/theme.js"></script>
     <script src="js/modals.js"></script>
     <script src="js/translation.js"></script>
-    <script type="module" src="js/script.js"></script>
-    <script type="module" src="js/firebase/firebase-init.js"></script>
-    <script type="module" src="js/firebase/ui/auth-ui.js"></script>
-    <script type="module" src="js/firebase/ui/profile-ui.js"></script>
+    <script type="module"
+            src="js/script.js"></script>
+    <script type="module"
+            src="js/firebase/firebase-init.js"></script>
+    <script type="module"
+            src="js/firebase/ui/auth-ui.js"></script>
+    <script type="module"
+            src="js/firebase/ui/profile-ui.js"></script>
 </body>
 
 </html>

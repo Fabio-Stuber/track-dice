@@ -53,3 +53,57 @@ if ("serviceWorker" in navigator) {
             .catch((err) => console.log("ServiceWorker offline", err));
     });
 }
+
+const fields = document.querySelectorAll(".code-field");
+const hiddenInput = document.getElementById("joinTripCode");
+
+// Hilfsfunktion: Aktualisiert das versteckte Feld für deine anderen Skripte
+function updateHiddenInput() {
+    let fullCode = "";
+    fields.forEach((field) => {
+        fullCode += field.value;
+    });
+
+    hiddenInput.value = fullCode;
+
+    // Simuliert ein "Input"-Event, falls andere Skripte den Wert live überwachen
+    hiddenInput.dispatchEvent(new Event("input", { bubbles: true }));
+    hiddenInput.dispatchEvent(new Event("change", { bubbles: true }));
+}
+
+fields.forEach((field, index) => {
+    // 1. Copy/Paste (Einfügen) abfangen
+    field.addEventListener("paste", (e) => {
+        e.preventDefault();
+        const pastedData = (e.clipboardData || window.clipboardData)
+            .getData("text")
+            .toUpperCase()
+            .trim();
+
+        for (let i = 0; i < pastedData.length; i++) {
+            if (index + i < fields.length) {
+                fields[index + i].value = pastedData[i];
+                fields[index + i].focus();
+            }
+        }
+        updateHiddenInput(); // Wert aktualisieren
+    });
+
+    // 2. Normale Eingabe per Tastatur
+    field.addEventListener("input", (e) => {
+        field.value = field.value.toUpperCase();
+
+        if (field.value.length === 1 && index < fields.length - 1) {
+            fields[index + 1].focus();
+        }
+        updateHiddenInput(); // Wert aktualisieren
+    });
+
+    // 3. Zurück-Taste (Backspace)
+    field.addEventListener("keydown", (e) => {
+        if (e.key === "Backspace" && field.value.length === 0 && index > 0) {
+            fields[index - 1].focus();
+            updateHiddenInput(); // Wert aktualisieren
+        }
+    });
+});

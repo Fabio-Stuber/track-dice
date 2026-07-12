@@ -80,52 +80,54 @@ let unsubscribeTrip = null;
 // SBB Gleiswürfeln original Würfel-Grafik Generator
 function getDiceSvg(val) {
     const dots = {
-        1: [[24, 24]],
+        1: [[12, 12]],
         2: [
-            [12, 12],
-            [36, 36],
+            [6, 6],
+            [18, 18],
         ],
         3: [
+            [6, 6],
             [12, 12],
-            [24, 24],
-            [36, 36],
+            [18, 18],
         ],
         4: [
-            [12, 12],
-            [12, 36],
-            [36, 12],
-            [36, 36],
+            [6, 6],
+            [6, 18],
+            [18, 6],
+            [18, 18],
         ],
         5: [
+            [6, 6],
+            [6, 18],
             [12, 12],
-            [12, 36],
-            [24, 24],
-            [36, 12],
-            [36, 36],
+            [18, 6],
+            [18, 18],
         ],
         6: [
-            [12, 12],
-            [12, 24],
-            [12, 36],
-            [36, 12],
-            [36, 24],
-            [36, 36],
+            [6, 6],
+            [6, 12],
+            [6, 18],
+            [18, 6],
+            [18, 12],
+            [18, 18],
         ],
     };
 
-    const activeDots = dots[val] || [];
-    // Weisse Punkte erzeugen
-    const dotsHtml = activeDots
-        .map((d) => `<circle cx="${d[0]}" cy="${d[1]}" r="4" fill="#ffffff"/>`)
-        .join("");
+    let dotsHtml = "";
+    if (dots[val]) {
+        dotsHtml = dots[val]
+            .map(
+                (coord) =>
+                    `<circle cx="${coord[0]}" cy="${coord[1]}" r="2" class="fill-sbb-red" />`,
+            )
+            .join("");
+    }
 
-    // Original SBB roter Hintergrund mit abgerundeten Ecken
     return `
-        <svg class="w-20 h-20 shadow-lg" viewBox="0 0 48 48">
-            <rect x="2" y="2" width="44" height="44" rx="6" fill="#eb0000" />
-            ${dotsHtml}
+        <svg class="w-12 h-12 bg-white border border-slate-300 rounded-sm shadow-sm" viewBox="0 0 24 24">
+          ${dotsHtml}
         </svg>
-    `;
+      `;
 }
 
 export async function initTripView(userId) {
@@ -170,11 +172,9 @@ function setupTripRealtimeListener(tripId) {
         const user = auth.currentUser;
         if (user) {
             if (tripData.hostId === user.uid) {
-                // Ich bin der Ersteller -> Ich darf beenden, aber nicht verlassen
                 btnEndTrip?.classList.remove("hidden");
                 btnLeaveTrip?.classList.add("hidden");
             } else {
-                // Ich bin ein Mitreisender -> Ich darf verlassen, aber nicht beenden
                 btnEndTrip?.classList.add("hidden");
                 btnLeaveTrip?.classList.remove("hidden");
             }
@@ -202,15 +202,19 @@ async function fetchFilteredDestinations(stationName) {
         if (!res.ok) return ["Olten", "Bern", "Zürich HB", "Luzern"];
         const data = await res.json();
         if (!data.stationboard || data.stationboard.length === 0)
-            return ["Olten", "Bern", "Zürich HB"];
+            return ["Olten"];
 
-        return data.stationboard
-            .map((item) => item.to)
-            .filter(
-                (name, idx, self) =>
-                    name && name !== stationName && self.indexOf(name) === idx,
-            )
-            .slice(0, 6);
+        return (
+            data.stationboard
+                .map((item) => item.to.trim())
+                .filter(
+                    (name, idx, self) =>
+                        name &&
+                        name !== stationName &&
+                        self.indexOf(name) === idx,
+                )
+                .slice(0, 6)
+        );
     } catch (e) {
         return ["Olten", "Bern", "Zürich HB"];
     }
@@ -276,8 +280,8 @@ async function renderGameSteps(gameState) {
 
     if (currentStep === "destination") {
         step1.classList.remove("hidden");
-        if (destDiceDisplay) destDiceDisplay.classList.add("hidden");
-        containerPossibleDestinations.innerHTML = `<p class="text-xs text-gray-400 italic animate-pulse">Loading live destinations...</p>`;
+        if (destDiceDisplay)
+            containerPossibleDestinations.innerHTML = `<p class="text-xs text-gray-400 italic animate-pulse">Loading live destinations...</p>`;
 
         currentPossibleDestinationsList = await fetchFilteredDestinations(
             gameState.currentStation,
@@ -288,8 +292,8 @@ async function renderGameSteps(gameState) {
             const p = document.createElement("p");
             p.id = `dest-option-${idx + 1}`;
             p.className =
-                "text-xs text-gray-900 dark:text-white font-medium py-1.5 px-2 flex justify-between rounded-sm transition-all";
-            p.innerHTML = `<span>${idx + 1}. ${dest}</span>`;
+                "text-sm text-gray-900 dark:text-white font-medium p-1 flex items-center rounded-sm transition-all";
+            p.innerHTML = `<span class="bg-red-600 text-white font-bold px-2 py-1.5 h-8 w-8 text-center rounded-sm mr-4">${idx + 1}</span> <span> ${dest}</span>`;
             containerPossibleDestinations.appendChild(p);
         });
 
@@ -369,7 +373,6 @@ function triggerDiceAnimation(
     callback,
 ) {
     if (displayContainer) displayContainer.classList.remove("hidden");
-    wrapperElement.classList.add("animate-bounce");
     let counter = 0;
     const interval = setInterval(() => {
         wrapperElement.innerHTML = getDiceSvg(
@@ -378,11 +381,10 @@ function triggerDiceAnimation(
         counter++;
         if (counter > 12) {
             clearInterval(interval);
-            wrapperElement.classList.remove("animate-bounce");
             wrapperElement.innerHTML = getDiceSvg(finalValue);
             if (callback) callback();
         }
-    }, 60);
+    }, 100);
 }
 
 // Event-Listener: Schritt 1 - Destination würfeln

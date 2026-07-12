@@ -1,43 +1,77 @@
 <!doctype html>
-<html class="scroll-smooth no-copy" lang="en">
+<html class="scroll-smooth no-copy"
+      lang="en">
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
 
     <title data-key="index.meta.title">
         Roll the Track Dice - Your Random Train Adventure
     </title>
-    <meta name="index.meta.description" data-key="meta_description"
-        content="Experience a thrilling random adventure with the Track Dice!" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://app.gleiswuerfeln.ch/" />
-    <link rel="alternate" hreflang="de" href="https://app.gleiswuerfeln.ch/" />
-    <link rel="alternate" hreflang="en" href="https://app.gleiswuerfeln.ch/?lang=en" />
-    <link rel="alternate" hreflang="fr" href="https://app.gleiswuerfeln.ch/?lang=fr" />
-    <link rel="alternate" hreflang="it" href="https://app.gleiswuerfeln.ch/?lang=it" />
-    <link rel="alternate" hreflang="x-default" href="https://app.gleiswuerfeln.ch/?lang=en" />
+    <meta name="index.meta.description"
+          data-key="meta_description"
+          content="Experience a thrilling random adventure with the Track Dice!" />
+    <meta name="robots"
+          content="index, follow" />
+    <link rel="canonical"
+          href="https://app.gleiswuerfeln.ch/" />
+    <link rel="alternate"
+          hreflang="de"
+          href="https://app.gleiswuerfeln.ch/" />
+    <link rel="alternate"
+          hreflang="en"
+          href="https://app.gleiswuerfeln.ch/?lang=en" />
+    <link rel="alternate"
+          hreflang="fr"
+          href="https://app.gleiswuerfeln.ch/?lang=fr" />
+    <link rel="alternate"
+          hreflang="it"
+          href="https://app.gleiswuerfeln.ch/?lang=it" />
+    <link rel="alternate"
+          hreflang="x-default"
+          href="https://app.gleiswuerfeln.ch/?lang=en" />
 
-    <link rel="icon" type="image/svg+xml" href="img/logo-track-dice.svg" />
+    <link rel="icon"
+          type="image/svg+xml"
+          href="img/logo-track-dice.svg" />
 
-    <link rel="manifest" href="manifest.json" />
+    <link rel="manifest"
+          href="manifest.json" />
 
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="Track Dice" />
-    <link rel="apple-touch-icon" href="img/logo-512.png" />
+    <meta name="apple-mobile-web-app-capable"
+          content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="default" />
+    <meta name="apple-mobile-web-app-title"
+          content="Track Dice" />
+    <link rel="apple-touch-icon"
+          href="img/logo-512.png" />
 
-    <meta property="og:type" content="website" />
-    <meta property="og:title" data-key="index.meta.title" content="Roll the Track Dice - Your Random Train Adventure" />
-    <meta property="og:description" data-key="index.meta.description"
-        content="Experience a thrilling random adventure with the Track Dice!" />
-    <meta property="og:url" content="https://app.gleiswuerfeln.ch/" />
-    <meta property="og:image" content="https://app.gleiswuerfeln.ch/img/track-dice.jpg" />
-    <meta property="og:locale" data-key="meta_locale" content="de_CH" />
+    <meta property="og:type"
+          content="website" />
+    <meta property="og:title"
+          data-key="index.meta.title"
+          content="Roll the Track Dice - Your Random Train Adventure" />
+    <meta property="og:description"
+          data-key="index.meta.description"
+          content="Experience a thrilling random adventure with the Track Dice!" />
+    <meta property="og:url"
+          content="https://app.gleiswuerfeln.ch/" />
+    <meta property="og:image"
+          content="https://app.gleiswuerfeln.ch/img/track-dice.jpg" />
+    <meta property="og:locale"
+          data-key="meta_locale"
+          content="de_CH" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400..900&display=swap" rel="stylesheet" />
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com" />
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400..900&display=swap"
+          rel="stylesheet" />
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss">
@@ -46,7 +80,8 @@
                 --font-sans: "Maven Pro", sans-serif;
             }
         </style>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet"
+          href="css/style.css" />
 </head>
 
 <body class="font-sans flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -58,10 +93,12 @@
 
         <div class="text-center space-y-2">
             <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white uppercase tracking-wide">
-                <span data-key="shared.title">Reise von</span> <span id="shared-creator-name" class="text-red-600">Name
+                <span data-key="shared.title">Reise von</span> <span id="shared-creator-name"
+                      class="text-red-600">Name
                     des Spielers</span>
             </h1>
-            <h2 id="shared-trip-name" class="text-xl text-gray-700 dark:text-gray-300">
+            <h2 id="shared-trip-name"
+                class="text-xl text-gray-700 dark:text-gray-300">
                 Name der Reise (z.B. Sommerausflug)
             </h2>
         </div>
@@ -75,10 +112,10 @@
                         Die Route
                     </h2>
 
-                    <ul id="shared-timeline" class="relative border-l-2 border-red-600 ml-3 space-y-8 pb-4">
+                    <ul id="shared-timeline"
+                        class="relative border-l-2 border-red-600 ml-3 space-y-8 pb-4">
                         <li class="pl-6 relative">
-                            <div
-                                class="absolute w-4 h-4 bg-red-600 rounded-full border-2 border-white dark:border-gray-800 -left-[9px] top-1">
+                            <div class="absolute w-4 h-4 bg-red-600 rounded-full border-2 border-white dark:border-gray-800 -left-[9px] top-1">
                             </div>
                             <h3 class="font-bold text-gray-900 dark:text-white">Bern Hauptbahnhof</h3>
                             <p class="text-sm text-gray-600 dark:text-gray-400">Ankunft: 10:30 Uhr</p>
@@ -90,8 +127,7 @@
                         </li>
 
                         <li class="pl-6 relative">
-                            <div
-                                class="absolute w-4 h-4 bg-red-600 rounded-full border-2 border-white dark:border-gray-800 -left-[9px] top-1">
+                            <div class="absolute w-4 h-4 bg-red-600 rounded-full border-2 border-white dark:border-gray-800 -left-[9px] top-1">
                             </div>
                             <h3 class="font-bold text-gray-900 dark:text-white">Thun</h3>
                             <p class="text-sm text-gray-600 dark:text-gray-400">Ankunft: 11:45 Uhr</p>
@@ -103,8 +139,9 @@
             <div class="lg:col-span-2">
                 <div class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-2 h-[500px] lg:h-[600px] flex flex-col">
                     <div id="shared-map-container"
-                        class="w-full h-full bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center">
-                        <p class="text-gray-500 dark:text-gray-400" data-key="shared.map_placeholder">Karte wird
+                         class="w-full h-full bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+                        <p class="text-gray-500 dark:text-gray-400"
+                           data-key="shared.map_placeholder">Karte wird
                             geladen...</p>
                     </div>
                 </div>
@@ -112,17 +149,18 @@
 
         </div>
 
-        <div
-            class="mt-12 text-center bg-gray-100 dark:bg-gray-800 rounded-xl p-8 shadow-sm border border-gray-200 dark:border-gray-700">
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4" data-key="shared.cta_title">
+        <div class="mt-12 text-center bg-gray-100 dark:bg-gray-800 rounded-xl p-8 shadow-sm border border-gray-200 dark:border-gray-700">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4"
+                data-key="shared.cta_title">
                 Lust auf ein eigenes Abenteuer?
             </h3>
-            <p class="text-gray-700 dark:text-gray-300 mb-6 max-w-xl mx-auto" data-key="shared.cta_desc">
+            <p class="text-gray-700 dark:text-gray-300 mb-6 max-w-xl mx-auto"
+               data-key="shared.cta_desc">
                 Track Dice ist das Spiel, bei dem der Würfel entscheidet, wohin die Zugreise geht. Erstelle eine eigene
                 Reise oder spiele mit Freunden!
             </p>
             <a href="index.html"
-                class="inline-block bg-red-600 hover:bg-red-700 text-white rounded-sm px-6 py-3 font-medium transition">
+               class="inline-block bg-red-600 hover:bg-red-700 text-white rounded-sm px-6 py-3 font-medium transition">
                 <span data-key="shared.cta_btn">Jetzt kostenlos mitspielen</span>
             </a>
         </div>
@@ -149,9 +187,12 @@
     <script src="js/modals.js"></script>
     <script src="js/translation.js"></script>
     <script src="js/script.js"></script>
-    <script type="module" src="js/firebase/firebase-init.js"></script>
-    <script type="module" src="js/firebase/ui/auth-ui.js"></script>
-    <script type="module" src="js/firebase/ui/profile-ui.js"></script>
+    <script type="module"
+            src="js/firebase/firebase-init.js"></script>
+    <script type="module"
+            src="js/firebase/ui/auth-ui.js"></script>
+    <script type="module"
+            src="js/firebase/ui/profile-ui.js"></script>
 </body>
 
 </html>
