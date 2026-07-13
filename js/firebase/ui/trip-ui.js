@@ -93,7 +93,7 @@ export async function initTripView(userId) {
                           .map(
                               (member) => `
                 <div class="w-8 h-8 rounded-full border-2 border-gray-100 dark:border-gray-700 overflow-hidden bg-gray-300">
-                    <img src="${member.avatarUrl || "https://ui-avatars.com/api/?name=User&background=random"}" 
+                    <img src="${member.avatarUrl || "https://ui-avatars.com/api/?name=" + member + "&background=random"}" 
                          class="w-full h-full object-cover" 
                          alt="Avatar"
                          onerror="this.src='https://ui-avatars.com/api/?name=User&background=random'">
