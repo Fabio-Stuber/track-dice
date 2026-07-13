@@ -202,17 +202,12 @@
                     class="text-2xl font-bold text-gray-900 dark:text-white uppercase">
                     index.show-logged-in.dashboard.past_trips
                 </h3>
-                <div id="past-trips-list"
-                     class="flex flex-col gap-4">
+                <div id="container-past-trips">
                     <p data-key="index.show-logged-in.dashboard.no_trips"
                        class="text-sm text-gray-900 dark:text-white italic">
                         index.show-logged-in.dashboard.no_trips
                     </p>
-                    <button data-key="index.show-logged-in.dashboard.create_btn"
-                            id="btnCreateNewTrip"
-                            class="w-full bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
-                        index.show-logged-in.dashboard.create_btn
-                    </button>
+
                 </div>
             </section>
         </div>
@@ -328,19 +323,20 @@
                         <span data-key="index.show-logged-in.trip.filter_ship">index.show-logged-in.trip.filter_ship</span>
                     </label>
                     <label class="flex items-center space-x-2 text-sm font-medium text-gray-900 dark:text-white cursor-pointer">
-                        <input id="filter-cableway"
-                               class="w-4 h-4 rounded-sm border-gray-300 text-red-600 focus:ring-red-500"
-                               type="checkbox"
-                               checked />
-                        <span data-key="index.show-logged-in.trip.filter_cableway">index.show-logged-in.trip.filter_cableway</span>
-                    </label>
-                    <label class="flex items-center space-x-2 text-sm font-medium text-gray-900 dark:text-white cursor-pointer">
                         <input id="filter-tram"
                                class="w-4 h-4 rounded-sm border-gray-300 text-red-600 focus:ring-red-500"
                                type="checkbox"
                                checked />
                         <span data-key="index.show-logged-in.trip.filter_tram">index.show-logged-in.trip.filter_tram</span>
                     </label>
+                    <label class="flex items-center space-x-2 text-sm font-medium text-gray-900 dark:text-white cursor-pointer">
+                        <input id="filter-cableway"
+                               class="w-4 h-4 rounded-sm border-gray-300 text-red-600 focus:ring-red-500"
+                               type="checkbox"
+                               checked />
+                        <span data-key="index.show-logged-in.trip.filter_cableway">index.show-logged-in.trip.filter_cableway</span>
+                    </label>
+
                 </div>
 
             </section>
@@ -351,32 +347,30 @@
                 <h3 class="text-sm font-bold text-gray-900 dark:text-white uppercase">
                     <span data-key="index.show-logged-in.trip.step_1_label"
                           class="bg-red-600 text-white font-bold px-2 py-1 rounded-sm mr-2">index.show-logged-in.trip.step_1_label</span>
-                    <span data-key="index.show-logged-in.trip.step_1_title"></span>
+                    <span data-key="index.show-logged-in.trip.step_1_title">index.show-logged-in.trip.step_1_title</span>
                 </h3>
 
                 <div id="container-possible-destinations"
-                     class="w-full p-2.5 rounded-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white max-h-60 overflow-y-auto space-y-1">
+                     class="w-full p-2.5 rounded-sm bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white max-h-60 overflow-y-auto space-y-1">
                 </div>
 
                 <div id="dest-dice-display-container"
-                     class="hidden flex flex-col items-center justify-center p-2.5 rounded-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                     class="hidden flex flex-col items-center justify-center p-2.5 rounded-sm bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white">
                     <div id="dest-dice-wrapper"
                          class="flex justify-center items-center space-x-2 py-2"></div>
                     <div class="text-center mt-3">
-                        <p class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Du hast gewürfelt</p>
+                        <p class="text-xs text-gray-900 dark:text-white uppercase tracking-wider font-semibold">Du hast gewürfelt</p>
                         <p id="dice-sum-display"
-                           class="text-3xl font-black text-sbb-dark">0</p>
-                        <p id="dice-result-msg"
-                           class="text-sm font-medium text-sbb-red mt-1"></p>
+                           class="text-3xl font-black text-gray-900 dark:text-white">0</p>
                     </div>
                 </div>
 
                 <div id="destination-result"
-                     class="hidden p-5 text-center rounded-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white max-h-60 overflow-y-auto space-y-1">
+                     class="hidden p-5 text-center rounded-sm bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white max-h-60 overflow-y-auto space-y-1">
                     <span id="valRolledDestination"></span>
                 </div>
-                <div class="flex flex-col md:flex-row items-center gap-4 w-full">
-                    <!-- Der erste Bereich: wächst nicht, nimmt nur den Platz ein, den er braucht -->
+                <div id="dice-button-1"
+                     class="flex flex-col md:flex-row items-center gap-4 w-full">
                     <div class="flex items-center justify-between space-x-3 w-full md:w-auto flex-none">
                         <span class="text-sm font-semibold text-gray-600 dark:text-gray-300">Anzahl Würfel:</span>
                         <div class="flex space-x-1 p-1 bg-gray-600 rounded-sm border border-gray-200 dark:border-gray-600">
@@ -389,7 +383,6 @@
                         </div>
                     </div>
 
-                    <!-- Der zweite Bereich: nimmt den restlichen Platz ein (flex-1) -->
                     <button data-key="index.steps.dest_btn"
                             id="btnRollDestination"
                             class="flex-1 w-full bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
@@ -401,59 +394,71 @@
 
             <section id="step-2-connection"
                      class="shadow-md bg-white dark:bg-gray-800 rounded-xl p-8 space-y-4">
-                <div class="flex items-center space-x-2">
-                    <span class="bg-gray-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider">Step 2</span>
-                    <h3 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider">
-                        Route & Stationen
-                    </h3>
-                </div>
 
-                <div class="bg-gray-50 dark:bg-gray-700 rounded-sm p-4 text-xs font-mono text-gray-900 dark:text-white flex justify-between border border-gray-200 dark:border-gray-600"
+                <h3 class="text-sm font-bold text-gray-900 dark:text-white uppercase">
+                    <span data-key="index.show-logged-in.trip.step_2_label"
+                          class="bg-red-600 text-white font-bold px-2 py-1 rounded-sm mr-2">index.show-logged-in.trip.step_2_label</span>
+                    <span data-key="index.show-logged-in.trip.step_2_title">index.show-logged-in.trip.step_2_title</span>
+                </h3>
+
+                <div class="bg-gray-100 dark:bg-gray-700 rounded-sm p-4 text-xs font-mono text-gray-900 dark:text-white flex justify-between"
                      id="lblNextConnection">
                     <span>Lade Verbindung...</span>
                 </div>
 
                 <div class="space-y-2">
-                    <p class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Mögliche Ausstiege:</p>
-                    <div class="bg-gray-50 dark:bg-gray-700 rounded-sm p-4 max-h-44 overflow-y-auto space-y-2 border border-gray-200 dark:border-gray-600"
-                         id="container-intermediate-stops"></div>
-                </div>
+                    <p class="text-[10px] uppercase font-bold text-gray-400">Mögliche Ausstiege:</p>
 
-                <!-- Würfel-Auswahl (1, 2 oder 3) -->
-                <div class="flex items-center justify-between space-x-3 bg-gray-50 dark:bg-gray-700 p-3 rounded-sm border border-gray-200 dark:border-gray-600">
-                    <span class="text-sm font-semibold text-gray-600 dark:text-gray-300">Anzahl Würfel:</span>
-                    <div class="flex space-x-1 bg-white dark:bg-gray-800 p-1 rounded-sm border border-gray-200 dark:border-gray-600">
-                        <button id="btnStopsDice1"
-                                class="px-3 py-1 text-sm font-bold rounded-sm bg-red-600 text-white transition cursor-pointer">1</button>
-                        <button id="btnStopsDice2"
-                                class="px-3 py-1 text-sm font-bold rounded-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition cursor-pointer">2</button>
-                        <button id="btnStopsDice3"
-                                class="px-3 py-1 text-sm font-bold rounded-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition cursor-pointer">3</button>
+
+                    <div id="container-intermediate-stops"
+                         class="w-full p-2.5 rounded-sm bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white max-h-60 overflow-y-auto space-y-1">
                     </div>
                 </div>
+
 
                 <!-- Die rollenden Würfel -->
                 <div id="stations-dice-display-container"
-                     class="hidden flex flex-col items-center justify-center p-4 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-sm">
+                     class="hidden flex flex-col items-center justify-center p-4 bg-gray-100 dark:bg-gray-700 rounded-sm">
                     <div id="stations-dice-wrapper"
                          class="flex justify-center items-center space-x-2 py-2"></div>
+                    <div class="text-center mt-3">
+                        <p class="text-xs text-gray-900 dark:text-white uppercase tracking-wider font-semibold">Du hast gewürfelt</p>
+                        <p id="dice-stations-sum-display"
+                           class="text-3xl font-black text-gray-900 dark:text-white">0</p>
+                    </div>
                 </div>
 
-                <button id="btnRollStationCount"
-                        class="w-full bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
-                    Station erwürfeln
-                </button>
+
 
                 <!-- Das Resultat -->
                 <div id="stations-result"
-                     class="hidden bg-gray-50 dark:bg-gray-700 rounded-sm p-4 text-sm text-center space-y-2 border border-gray-200 dark:border-gray-600">
-                    <div class="font-bold text-red-600 dark:text-red-400">
-                        Du hast <span id="valRolledStops">0</span> gewürfelt!
-                    </div>
+                     class="hidden bg-gray-100 dark:bg-gray-700 rounded-sm p-4 text-sm text-center space-y-2">
+
                     <div class="text-xs font-medium text-gray-900 dark:text-white">
                         Dein Ausstieg: <span id="valNextExitStation"
                               class="font-bold text-red-600 dark:text-red-400 uppercase tracking-wide">-</span>
                     </div>
+                </div>
+
+                <div id="dice-button-2"
+                     class="flex flex-col md:flex-row items-center gap-4 w-full">
+                    <div class="flex items-center justify-between space-x-3 w-full md:w-auto flex-none">
+                        <span class="text-sm font-semibold text-gray-600 dark:text-gray-300">Anzahl Würfel:</span>
+                        <div class="flex space-x-1 p-1 bg-gray-600 rounded-sm border border-gray-200 dark:border-gray-600">
+                            <button id="btnStopsDice1"
+                                    class="bg-red-600 text-white rounded-sm px-3.5 py-1.5 text-sm font-medium transition cursor-pointer">1</button>
+                            <button id="btnStopsDice2"
+                                    class="bg-gray-600 hover:bg-gray-700 text-white rounded-sm px-3.5 py-1.5 text-sm font-medium transition cursor-pointer">2</button>
+                            <button id="btnStopsDice3"
+                                    class="bg-gray-600 hover:bg-gray-700 text-white rounded-sm px-3.5 py-1.5 text-sm font-medium transition cursor-pointer">3</button>
+                        </div>
+                    </div>
+
+                    <button data-key="index.steps.dest_btn"
+                            id="btnRollStationCount"
+                            class="flex-1 w-full bg-red-600 hover:bg-red-700 text-white rounded-sm px-5 py-2.5 text-sm font-medium transition cursor-pointer">
+                        index.steps.dest_btn
+                    </button>
                 </div>
             </section>
 
@@ -531,6 +536,12 @@
             src="js/firebase/ui/auth-ui.js"></script>
     <script type="module"
             src="js/firebase/ui/profile-ui.js"></script>
+    <script type="module"
+            src="js/firebase/ui/trip-ui.js"></script>
+    <script type="module"
+            src="js/firebase/ui/step1-destination.js"></script>
+    <script type="module"
+            src="js/firebase/ui/step2-connection.js"></script>
 </body>
 
 </html>

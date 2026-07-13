@@ -37,8 +37,6 @@ window.updateUserProfile = function (
                             avatarUrl: avatarUrl,
                             language: language,
                             sbbTarif: sbbTarif,
-                            role: "Member",
-                            subscription: "Free",
                         },
                         { merge: true },
                     );

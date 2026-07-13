@@ -66,7 +66,6 @@ export async function createNewTrip(userId, title) {
     const tripId = generateTripId();
     const tripRef = doc(db, "trips", tripId);
     const startStation = await getStationFromCurrentLocation();
-
     const initialData = {
         title: title,
         hostId: userId,
@@ -83,10 +82,18 @@ export async function createNewTrip(userId, title) {
             currentConnection: null,
             rolledStations: null,
             durationAtStation: 0,
+            lastDestRolls: null,
+            lastStationRolls: null,
+            filters: {
+                train: true,
+                bus: true,
+                ship: true,
+                cableway: true,
+                tram: true,
+            },
         },
         diary: [],
     };
-
     await setDoc(tripRef, initialData);
     return tripId;
 }
@@ -141,11 +148,11 @@ export async function leaveTrip(tripId, userId) {
 export async function getUserPastTrips(userId) {
     const tripsRef = collection(db, "trips");
 
+    // KORREKTUR: Wir entfernen das orderBy hier, damit Firebase die Abfrage nicht blockiert!
     const q = query(
         tripsRef,
         where("members", "array-contains", userId),
         where("status", "==", "completed"),
-        orderBy("createdAt", "desc"),
     );
 
     const querySnapshot = await getDocs(q);
@@ -153,6 +160,14 @@ export async function getUserPastTrips(userId) {
     querySnapshot.forEach((doc) => {
         trips.push({ id: doc.id, ...doc.data() });
     });
+
+    // Sortierung direkt im JavaScript erledigen (Neueste zuerst)
+    trips.sort((a, b) => {
+        const dateA = a.createdAt ? new Date(a.createdAt) : new Date(0);
+        const dateB = b.createdAt ? new Date(b.createdAt) : new Date(0);
+        return dateB - dateA;
+    });
+
     return trips;
 }
 

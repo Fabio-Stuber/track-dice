@@ -71,23 +71,53 @@
         "description": "Es tut uns leid, aber diese Schiene führt ins Leere. Die gesuchte Seite wurde möglicherweise verschoben, gelöscht oder existiert nicht mehr.",
         "button": "Zurück zur Startseite"
     },
-    "index": {
+"index": {
         "meta": {
             "title": "Gleiswürfeln - Dein Zufallsabenteuer auf der Schiene",
             "description": "Erlebe ein spannendes Zufallsabenteuer mit dem Gleiswürfeln!",
             "locale": "de_CH"
         },
         "show-logged-out": {
-            "title": "Dein  Zufälliges <br> Zugabenteuer",
-            "description": "Bereit für ein neues Abenteuer auf der Schiene? Bei Gleiswürfeln bestimmen allein die Würfel die Route deines Zuges. Schnapp dir die Würfel und leg gleich los: Starte dein zufälliges Zugabenteuer! ",
+            "title": "Dein Zufälliges <br> Zugabenteuer",
+            "description": "Bereit für ein neues Abenteuer auf der Schiene? Bei Gleiswürfeln bestimmen allein die Würfel die Route deines Zuges. Schnapp dir die Würfel und leg gleich los: Starte dein zufälliges Zugabenteuer!",
             "loginbtn": "Anmelden",
             "signupbtn": "Konto erstellen"
         },
         "show-logged-in": {
-            "title": "Dein  Zufälliges Zugabenteuer",
-            "description": "Bereit für ein neues Abenteuer auf der Schiene? Bei Gleiswürfeln bestimmen allein die Würfel die Route deines Zuges. Schnapp dir die Würfel und leg gleich los: Starte dein zufälliges Zugabenteuer! ",
+            "title": "Dein Zufälliges Zugabenteuer",
+            "description": "Bereit für ein neues Abenteuer auf der Schiene? Bei Gleiswürfeln bestimmen allein die Würfel die Route deines Zuges. Schnapp dir die Würfel und leg gleich los: Starte dein zufälliges Zugabenteuer!",
             "loginbtn": "Anmelden",
-            "signupbtn": "Konto erstellen"
+            "signupbtn": "Konto erstellen",
+            "dashboard": {
+                "title": "Übersicht",
+                "create_btn": "Neue Reise erstellen",
+                "or": "oder",
+                "entercode": "Code eingeben, um einer Reise beizutreten",
+                "join_btn": "Reise beitreten",
+                "past_trips": "Vergangene Reisen",
+                "no_trips": "Noch keine Reisen vorhanden."
+            },
+            "trip": {
+                "code": "Reisecode:",
+                "coop_label": "Mitreisende:",
+                "btnEndTrip": "Reise für alle beenden",
+                "btnLeaveTrip": "Reise verlassen",
+                "btnShareTrip": "Reise teilen",
+                "location_label": "Aktueller Standort",
+                "filter_label": "Verkehrsmittel filtern",
+                "filter_train": "Zug",
+                "filter_bus": "Bus",
+                "filter_ship": "Schiff",
+                "filter_cableway": "Seilbahn / Zahnradbahn",
+                "filter_tram": "Tram",
+                "step_1_label": "Schritt 1",
+                "step_1_title": "Wähle dein nächstes Ziel",
+                "step_2_label": "Schritt 2",
+                "step_2_title": "Route & Stationen"
+            }
+        },
+        "steps": {
+            "dest_btn": "Ziel auswürfeln"
         }
     },
     "account": {
